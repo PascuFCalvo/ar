@@ -12,33 +12,21 @@ const { image, alt, title, subtitle, description } = Astro.props;
 const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
 ---
 
+
 <div class="gallery-item">
   <img src={image} alt={alt} class="gallery-image" />
-  
   <div class="gallery-caption-overlay">
     {(subtitle || description) ? (
       <>
-        <input 
-          type="checkbox" 
-          id={uniqueId} 
-          class="expand-checkbox" 
-          hidden 
-        />
         <div class="gallery-title-row">
           <strong class="gallery-title">{title}</strong>
-          <label 
-            class="expand-btn" 
-            for={uniqueId}
-            tabindex="0" 
-            aria-label="Mostrar más"
-          >
+          <button class="expand-btn" tabindex="0" aria-label="Mostrar más" id={uniqueId + '-btn'}>
             <span class="expand-btn-icon">
               <span class="plus">+</span>
-              <span class="minus">−</span>
             </span>
-          </label>
+          </button>
         </div>
-        <div class="gallery-extra-text">
+        <div class="gallery-extra-text desktop-only">
           <div class="gallery-extra-inner">
             {subtitle && <div class="gallery-subtitle">{subtitle}</div>}
             {description && <div class="gallery-description">{description}</div>}
@@ -52,6 +40,81 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
     )}
   </div>
 </div>
+
+<script type="module">
+  import { showPopup } from './trabajo-popup.js';
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+      const btns = document.querySelectorAll('.expand-btn[id$="-btn"]');
+      btns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          if (window.matchMedia('(max-width: 600px)').matches) {
+            e.preventDefault();
+            const card = btn.closest('.gallery-caption-overlay');
+            const subtitle = card?.querySelector('.gallery-subtitle')?.outerHTML || '';
+            const description = card?.querySelector('.gallery-description')?.outerHTML || '';
+            showPopup(`${subtitle}${description}`, () => {});
+          }
+        });
+      });
+    });
+  }
+ </script>
+
+<style>
+  /* Oculta el extra-text en móvil, visible solo en desktop */
+  .desktop-only {
+    display: block;
+  }
+  @media (max-width: 600px) {
+    .desktop-only {
+      display: none !important;
+    }
+  }
+
+  /* Popup styles */
+  .trabajo-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s;
+  }
+  .trabajo-popup {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 90vw;
+    width: 95vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    padding: 1.5em 1.2em 1.2em 1.2em;
+    position: relative;
+    animation: popupIn 0.2s;
+  }
+  .trabajo-popup-close {
+    position: absolute;
+    top: 0.5em;
+    right: 0.7em;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #888;
+    cursor: pointer;
+    z-index: 2;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes popupIn {
+    from { transform: translateY(40px) scale(0.98); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+</style>
 
 <style>
   .gallery-item {
