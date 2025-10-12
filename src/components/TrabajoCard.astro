@@ -14,34 +14,54 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
 <div class="gallery-item">
   <img src={image} alt={alt} class="gallery-image" />
-  
   <div class="gallery-caption-overlay">
     {(subtitle || description) ? (
       <>
+        <div class="gallery-title-row">
+          <strong class="gallery-title">{title}</strong>
+          <button 
+            class="expand-btn"
+            type="button"
+            tabindex="0"
+            aria-label="Mostrar más"
+            onClick={() => {
+              if (window.innerWidth <= 600) {
+                const modal = document.getElementById(`trabajo-modal-${uniqueId}`);
+                if (modal) modal.classList.add('active');
+              } else {
+                const checkbox = document.getElementById(uniqueId);
+                if (checkbox) checkbox.checked = !checkbox.checked;
+              }
+            }}
+          >
+            <span class="expand-btn-icon">
+              <span class="plus">+</span>
+              <span class="minus">−</span>
+            </span>
+          </button>
+        </div>
         <input 
           type="checkbox" 
           id={uniqueId} 
           class="expand-checkbox" 
           hidden 
         />
-        <div class="gallery-title-row">
-          <strong class="gallery-title">{title}</strong>
-          <label 
-            class="expand-btn" 
-            for={uniqueId}
-            tabindex="0" 
-            aria-label="Mostrar más"
-          >
-            <span class="expand-btn-icon">
-              <span class="plus">+</span>
-              <span class="minus">−</span>
-            </span>
-          </label>
-        </div>
         <div class="gallery-extra-text">
           <div class="gallery-extra-inner">
             {subtitle && <div class="gallery-subtitle">{subtitle}</div>}
             {description && <div class="gallery-description">{description}</div>}
+          </div>
+        </div>
+        {/* Modal for mobile */}
+        <div class="trabajo-modal" id={`trabajo-modal-${uniqueId}`} tabindex="-1">
+          <div class="trabajo-modal-content">
+            <button class="trabajo-modal-close" type="button" aria-label="Cerrar" onClick={() => {
+              const modal = document.getElementById(`trabajo-modal-${uniqueId}`);
+              if (modal) modal.classList.remove('active');
+            }}>×</button>
+            <div class="trabajo-modal-title">{title}</div>
+            {subtitle && <div class="trabajo-modal-subtitle">{subtitle}</div>}
+            {description && <div class="trabajo-modal-description">{description}</div>}
           </div>
         </div>
       </>
@@ -52,6 +72,75 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
     )}
   </div>
 </div>
+  /* Modal for mobile */
+  .trabajo-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+  }
+  .trabajo-modal.active {
+    display: flex;
+  }
+  .trabajo-modal-content {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 95vw;
+    width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2em 1.2em 1.2em 1.2em;
+    box-shadow: 0 2px 16px 0 rgba(17,138,178,0.18);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .trabajo-modal-close {
+    position: absolute;
+    top: 0.7em;
+    right: 1em;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #888;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .trabajo-modal-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5em;
+    text-align: left;
+  }
+  .trabajo-modal-subtitle {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: 0.5em;
+    text-align: left;
+  }
+  .trabajo-modal-description {
+    font-size: 1.1em;
+    color: #444;
+    white-space: pre-line;
+    line-height: 1.5;
+    text-align: left;
+  }
+  @media (min-width: 601px) {
+    .trabajo-modal {
+      display: none !important;
+    }
+  }
 
 <style>
   .gallery-item {
