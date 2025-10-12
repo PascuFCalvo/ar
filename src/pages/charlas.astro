@@ -1,0 +1,128 @@
+---
+---
+
+<section class="charlas-section">
+  <h1>Contratar charlas</h1>
+  <p>Apartado para contratar charlas</p>
+  <h2>Temas que trabajo:</h2>
+  <div class="charlas-cards">
+    <div class="charla-card">
+      <div class="charla-card-content">
+        <span class="charla-icon" aria-label="Motivación real">
+          <!-- Material Icon: lightbulb_outline -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/></svg>
+        </span>
+        <strong>Motivación real:</strong>
+        <p>Mi historia con la dislexia y el TDAH, y cómo aprendí a encontrar mi forma de hacer las cosas aunque durante años me hicieran sentir que no valía.</p>
+      </div>
+    </div>
+    <div class="charla-card">
+      <div class="charla-card-content">
+        <span class="charla-icon" aria-label="Estrategia con sentido común">
+          <!-- Material Icon: explore (compass) -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        </span>
+        <strong>Estrategia con sentido común:</strong>
+        <p>Cómo pensar en lo que importa y no liarse con lo que no.</p>
+      </div>
+    </div>
+    <div class="charla-card">
+      <div class="charla-card-content">
+        <span class="charla-icon" aria-label="Acción sin postureo">
+          <!-- Material Icon: rocket_launch -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20.5L9 16m7-7l-4.5-4.5M9 16l6-6m-6 6l-2.5 2.5M15 10l2.5-2.5M12 2v2m0 16v2m8-8h-2M4 12H2"/></svg>
+        </span>
+        <strong>Acción sin postureo:</strong>
+        <p>Cómo dar los primeros pasos sin necesitar mil herramientas, títulos o grandes presupuestos.</p>
+      </div>
+    </div>
+  </div>
+  <p>Si quieres que cuente mi historia o que ayude a tu equipo a encontrar la suya, escríbeme y lo hablamos.</p>
+</section>
+
+<style>
+.charlas-section {
+  height: 100%;
+  margin: 0;
+  padding: 2em 2em;
+  background: linear-gradient(to right, var(--color-info-dark, #2980b9) 40%, transparent 40%), url('/src/images/anacharla.jpg') right center/60% 100% no-repeat;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  color: #fff;
+  box-sizing: border-box;
+  background-blend-mode: normal;
+}
+.charlas-section h1 {
+  font-size: 2.2em;
+  margin-bottom: 0.5em;
+  color: var(--color-primary, #e67e22);
+}
+.charlas-section h2 {
+  font-size: 1.3em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: var(--color-info, #2980b9);
+}
+.charlas-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2em 0;
+}
+.charlas-list li {
+  margin-bottom: 1.5em;
+  font-size: 1.25em;
+  display: flex;
+  align-items: flex-start;
+}
+.charla-icon {
+  font-size: 1.25em;
+  margin-right: 0.7em;
+  line-height: 1.2;
+}
+  .charlas-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+    margin-bottom: 2em;
+  }
+    .charla-card {
+      background: var(--color-info, #2980b9);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+      padding: 1.5em 1.2em;
+      margin-bottom: 1.5em;
+      color: #fff;
+      transition: box-shadow 0.2s, background 0.2s;
+      border: none;
+      min-width: 240px;
+      max-width: 340px;
+      flex: 1 1 260px;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+  .charla-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .charla-icon {
+    margin-bottom: 0.7em;
+    margin-right: 0;
+    display: block;
+  }
+  .charla-card strong {
+    font-size: 1.25em;
+    display: block;
+    margin-bottom: 0.3em;
+  }
+  .charla-card p {
+    margin: 0;
+    font-size: 1.25em;
+    color: #fff;
+  }
+</style>

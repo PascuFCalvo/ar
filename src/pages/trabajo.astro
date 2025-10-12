@@ -1,0 +1,95 @@
+---
+import TrabajoCard from '../components/TrabajoCard.astro'; // Ensure this file exists in the specified path
+---
+
+<section class="trabajo-section">
+  <div class="trabajo-header">
+    <h2>CASOS DE EXITO</h2>
+    <p>Historias con final feliz que podemos contar.</p>
+  </div>
+  <div class="trabajo-gallery">
+    <TrabajoCard 
+      image="../../src/images/DoosBox.jpg" 
+      alt="Doos Box" 
+      title="📦 Doos Box" 
+      description="Doos Box capta clientes por correo y llamadas, pero no tenía una forma clara de organizar todo ese proceso.\nLa búsqueda de nuevos clientes y la planificación se le hacía bola.\nTrabajé en ordenar su proceso de captación, estructurar mejor la planificación y marcar una estrategia sencilla de email marketing.\nPróximamente…\nAhora estamos trabajando en que la creación de contenido no le quite la vida y pueda centrarse en lo que de verdad importa: vender. Estamos aprendiendo y pronto se verán los resultados." 
+    />
+    <TrabajoCard 
+      image="../../src/images/Dualcillo.jpg" 
+      alt="Dualcillo" 
+      title="👤 Dualcillo (marca personal)" 
+      description="He tenido el privilegio de guiar y apoyar a Juan (Dualcillo) en su estrategia de comunicación y marketing digital.\nJuntos hemos trabajado en:\n- Desarrollar estrategias para conectar con su audiencia.\n- Fortalecer su imagen personal.\n- Alinear sus mensajes con su visión y objetivos.\n- Aprender a tener constancia y organizarse.\n\nEn un año pasamos de menos de 10k seguidores a superar esa cifra y seguir creciendo de forma constante.\nAhora me siento un poco como una madre con el nido vacío: Juan ya vuela solo, y yo quedo como apoyo y amiga, feliz de verlo y estar." 
+    />
+    <TrabajoCard
+      image="../../src/images/Streamion.jpg"
+      alt="Streamion"
+      title="🚀 Streamion"
+      description="Streamion es una startup de tecnología que conecta marcas con creadores de contenido en streaming.\nColaboré en la definición de su estrategia de crecimiento y en la optimización de su embudo de captación de partners.\n\nTrabajamos en: \n- Mejorar la comunicación de valor para atraer tanto a marcas como a streamers.\n- Implementar procesos sencillos para escalar la captación sin perder el trato personal.\n- Analizar métricas clave para tomar decisiones rápidas y efectivas.\n\nEl resultado: Streamion multiplicó por dos su red de creadores y consiguió cerrar acuerdos con marcas relevantes en menos de seis meses.\n\nUn proyecto donde la agilidad y la creatividad han sido la clave para crecer en un sector tan dinámico como el streaming."
+    />
+    <TrabajoCard
+      image="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80"
+      alt="Charlas y talleres"
+      title="🎤 Charlas y talleres"
+      description="No doy charlas llenas de tecnicismos ni de frases de manual (ni aunque quisiera, me saldrían bien 😄).\nMe gusta hablar con humor, desde la experiencia real, y que la gente se vaya con ideas claras, no con una libreta llena de palabros que no va a usar.\n\nDe lo que hablo:\n- Motivación real: mi historia con la dislexia y el TDAH, y cómo aprendí a encontrar mi forma de hacer las cosas aunque durante años me hicieran sentir que no valía.\n- Estrategia con sentido común: cómo pensar en lo que importa y no liarse con lo que no.\n- Acción sin postureo: cómo dar los primeros pasos sin necesitar mil herramientas, títulos o grandes presupuestos.\n\nHe tenido la suerte de compartir todo esto en la Cámara de Comercio de Valencia, en centros de formación privados y en universidades, donde he visto a personas salir con ganas de hacer, no solo de escuchar.\n\nSi quieres que cuente mi historia o que ayude a tu gente a encontrar la suya, hablamos."
+    />
+  </div>
+</section>
+
+<style>
+.trabajo-section {
+  background: var(--color-almost-white);
+  padding: 4em 2vw 4em 2vw;
+  box-sizing: border-box;
+}
+.trabajo-header {
+  text-align: right;
+  margin-bottom: 2.5em;
+}
+.trabajo-header h2 {
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  color: var(--color-dark);
+}
+.trabajo-header p {
+  color: var(--color-info);
+  font-size: 1.25em;
+  margin: 0.5em 0 0 0;
+}
+.trabajo-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  grid-template-rows: repeat(2, minmax(200px, auto));
+  gap: 2em;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.trabajo-gallery > * {
+  min-width: 0;
+  min-height: 0;
+}
+.gallery-item {
+  background: #fff;
+  border-radius: 16px 16px 16px 16px;
+  box-shadow: 0 2px 16px 0 rgba(17,138,178,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.gallery-caption {
+  border-radius: 0 0 16px 16px;
+}
+.gallery-item img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+.gallery-caption {
+  padding: 1em 1.2em 1.2em 1.2em;
+  color: var(--color-dark);
+  font-size: 1.25em;
+  background: #fff;
+}
+</style>

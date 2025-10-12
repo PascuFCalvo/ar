@@ -1,0 +1,114 @@
+---
+const links = [
+  { label: 'Home', href: '#inicio' },
+  { label: 'Sobre Mí', href: '#sobre-mi' },
+  { label: 'Servicios', href: '#loquehago' },
+  { label: 'Trabajo', href: '#casosdeexito' },
+  { label: 'Experiencia', href: '#experiencia' },
+  { label: 'Clientes', href: '#clientes' },
+  { label: 'Charlas', href: '#charlas' },
+  
+];
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-copy">
+      © {new Date().getFullYear()} Ana Ruiz. Todos los derechos reservados.
+    </div>
+    <ul class="footer-links">
+      {links.map(link => (
+        <li><a href={link.href} class="footer-scroll-link">{link.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.footer-scroll-link').forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        const target = event.currentTarget as HTMLAnchorElement;
+        const href = target && target.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          event.preventDefault();
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  @import "../styles/palette.css";
+  
+  .footer {
+    background: var(--color-primary);
+    color: var(--color-accent);
+    padding: 2em 0 1em 0;
+    border-radius: 0 0 2em 2em;
+  }
+  
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .footer-copy {
+    font-size: 1em;
+    text-align: left;
+    margin-bottom: 0;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-end;
+  }
+  
+  .footer-links li {
+    margin: 0;
+  }
+  
+  .footer-links a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1;
+    transition: color 0.2s;
+  }
+  
+  .footer-links a:hover {
+    color: var(--color-dark);
+  }
+  
+  @media (max-width: 900px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+    }
+    
+    .footer-copy {
+      text-align: center;
+    }
+    
+    .footer-links {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+</style>

@@ -1,0 +1,25 @@
+.hero-img-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-img-main img {
+  display: block;
+  margin: 0 auto;
+  z-index: 11;
+  position: relative;
+  pointer-events: auto;
+}
+
+.hero-content-main {
+  position: relative;
+  z-index: 2;
+}

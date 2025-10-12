@@ -1,14 +1,19 @@
 <!doctype html>
 <html lang="en">
 	<head>
+		<link rel="stylesheet" href="/src/styles/global.css" />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 	</head>
 	<body>
-		<slot />
+		<div class="background-triangles" id="background-triangles"></div>
+		<div class="main-container">
+			<slot />
+		</div>
 	</body>
 </html>
 
@@ -19,4 +24,81 @@
 		width: 100%;
 		height: 100%;
 	}
+	body, html {
+		font-family: 'Poppins', Arial, Helvetica, sans-serif;
+	}
+	.background-triangles {
+		position: fixed;
+		z-index: 0;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		pointer-events: none;
+		background: #ffb3c6;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		filter: blur(2px) brightness(1.08);
+		transition: background 0.8s ease;
+	}
+	.main-container {
+		margin: 5px auto;
+		box-sizing: border-box;
+		min-height: 100vh;
+		max-width: 1600px;
+		width: 100%;
+		position: relative;
+		z-index: 1;
+	}
 </style>
+
+<script>
+	window.addEventListener('DOMContentLoaded', () => {
+		const bg = document.getElementById('background-triangles');
+		
+				// Define las secciones y sus colores
+				let sections = [
+						{ id: 'inicio', color: '#FF6B6B' },
+						{ id: 'sobre-mi', color: '#4ECDC4' },
+						{ id: 'servicios', color: '#FFD166' },
+						{ id: 'loquehago', color: '#45B7D1' },
+						{ id: 'casosdeexito', color: '#FFA07A' },
+						{ id: 'experiencia', color: '#98D8C8' },
+						{ id: 'contacto-final', color: '#F7DC6F' },
+				];
+				// Mezclar aleatoriamente los colores (manteniendo el id fijo)
+				const colors = sections.map(s => s.color);
+				function shuffle(array) {
+					for (let i = array.length - 1; i > 0; i--) {
+						const j = Math.floor(Math.random() * (i + 1));
+						[array[i], array[j]] = [array[j], array[i]];
+					}
+				}
+				shuffle(colors);
+				sections = sections.map((s, i) => ({ ...s, color: colors[i] }));
+
+		// Usar Intersection Observer para mejor rendimiento
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const section = sections.find(s => s.id === entry.target.id);
+					if (section) {
+						bg.style.background = section.color;
+					}
+				}
+			});
+		}, {
+			threshold: 0.5, // Se activa cuando el 50% de la sección es visible
+			rootMargin: '-20% 0px -20% 0px' // Ajusta para cambiar antes/después
+		});
+
+		// Observar todas las secciones
+		sections.forEach(section => {
+			const element = document.getElementById(section.id);
+			if (element) {
+				observer.observe(element);
+			}
+		});
+	});
+</script>

@@ -1,0 +1,53 @@
+---
+import ServicioCard from '../components/ServicioCard.astro';
+---
+
+<section class="servicios-section">
+  <h1>Lo que hago</h1>
+  <div class="servicios-grid">
+    <ServicioCard 
+      title="Estrategia y Crecimiento" 
+      description="• Doy forma a ideas que están por el aire.<br><br>• Aterrizo objetivos que tengan sentido.<br><br>• Veo oportunidades que a veces se escapan.<br><br>• Pienso campañas que conectan de verdad." 
+      icon={`<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z'/></svg>`}
+      color="yellow"
+    />
+    <ServicioCard 
+      title="Procesos y Automatización" 
+      description="• Miro cómo trabajas y detecto los líos.<br><br>• Propongo formas más simples de hacerlo.<br><br>• Dejo el camino claro para automatizar si toca." 
+      icon={`<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='2'/><path d='M8 9h8M8 15h8M9 8v8M15 8v8'/></svg>`}
+      color="pink"
+    />
+    <ServicioCard 
+      title="Marca Personal y Posicionamiento" 
+      description="• Te ayudo a contar bien lo que haces.<br><br>• Vemos cómo quieres sonar.<br><br>• Le damos dirección clara a tu marca."
+      icon={`<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='8' r='4'/><path d='M2 20c0-4 4-7 10-7s10 3 10 7'/></svg>`}
+      color="blue"
+    />
+  </div>
+</section>
+
+
+<style>
+@import '../styles/palette.css';
+.servicios-section {
+  background: var(--color-accent);
+  padding: 4em 5px 4em 5px;
+  margin-top: 0;
+}
+.servicios-section h1 {
+  color: #fff;
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 2em;
+  font-weight: 700;
+}
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1, auto);
+  gap: 5px;
+  max-width: 1300px;
+  margin: 0 auto;
+  overflow: visible;
+}
+</style>

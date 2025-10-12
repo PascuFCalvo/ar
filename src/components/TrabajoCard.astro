@@ -1,0 +1,189 @@
+---
+export interface Props {
+  image: string;
+  alt: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
+}
+const { image, alt, title, subtitle, description } = Astro.props;
+
+// Crear un ID único para el checkbox
+const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
+---
+
+<div class="gallery-item">
+  <img src={image} alt={alt} class="gallery-image" />
+  
+  <div class="gallery-caption-overlay">
+    {(subtitle || description) ? (
+      <>
+        <input 
+          type="checkbox" 
+          id={uniqueId} 
+          class="expand-checkbox" 
+          hidden 
+        />
+        <div class="gallery-title-row">
+          <strong class="gallery-title">{title}</strong>
+          <label 
+            class="expand-btn" 
+            for={uniqueId}
+            tabindex="0" 
+            aria-label="Mostrar más"
+          >
+            <span class="expand-btn-icon">
+              <span class="plus">+</span>
+              <span class="minus">−</span>
+            </span>
+          </label>
+        </div>
+        <div class="gallery-extra-text">
+          <div class="gallery-extra-inner">
+            {subtitle && <div class="gallery-subtitle">{subtitle}</div>}
+            {description && <div class="gallery-description">{description}</div>}
+          </div>
+        </div>
+      </>
+    ) : (
+      <div class="gallery-title-row">
+        <strong class="gallery-title">{title}</strong>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gallery-caption-overlay {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(255,255,255,0.96) 90%, rgba(255,255,255,0.7) 100%);
+    color: var(--color-primary);
+    padding: 1.1em 1.2em 1.2em 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    z-index: 2;
+    justify-content: flex-end;
+    min-height: 40%;
+    max-height: 100%;
+    box-sizing: border-box;
+  }
+
+  .gallery-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7em;
+  }
+
+  .gallery-title {
+    font-size: 1.25em;
+    font-weight: 700;
+    margin-bottom: 0.2em;
+  }
+
+  .expand-checkbox {
+    display: none;
+  }
+
+  .expand-btn {
+    background: var(--color-primary);
+      color: var(--color-accent, #222);
+    border: none;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    font-size: 1.3em;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(17, 138, 178, 0.08);
+    pointer-events: auto;
+  }
+
+  .expand-btn:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .expand-checkbox:focus + .expand-btn {
+    outline: 2px solid var(--color-primary-dark);
+    outline-offset: 2px;
+  }
+
+  .expand-btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .expand-btn-icon .minus {
+    display: none;
+  }
+
+  .expand-checkbox:checked ~ .gallery-title-row .expand-btn .plus {
+    display: none;
+  }
+
+  .expand-checkbox:checked ~ .gallery-title-row .expand-btn .minus {
+    display: inline;
+  }
+
+  .gallery-extra-text {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.25s 0.1s;
+  }
+
+  .expand-checkbox:checked ~ .gallery-extra-text {
+    max-height: 400px;
+    opacity: 1;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.25s;
+  }
+
+  .gallery-extra-inner {
+    transform: translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-top: 0.5em;
+  }
+
+  .expand-checkbox:checked ~ .gallery-extra-text .gallery-extra-inner {
+    transform: translateY(0);
+  }
+
+  .gallery-subtitle {
+    font-size: 1.25em;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: 0.5em;
+  }
+
+  .gallery-description {
+    font-size: 1.25em;
+    color: #444;
+    white-space: pre-line;
+    line-height: 1.5;
+  }
+</style>

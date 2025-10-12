@@ -1,0 +1,77 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  icon?: string; // URL o SVG inline
+  color?: 'yellow' | 'pink' | 'blue' | 'green';
+}
+const { title, description, icon, color = 'yellow' } = Astro.props;
+---
+<div class={`servicio-card servicio-card-${color}`} tabindex="0" onclick="this.classList.toggle('active')">
+  {icon && <div class="servicio-card-icon-row"><span class="servicio-card-icon" set:html={icon}></span></div>}
+  <div class="servicio-card-header">
+    <h3>{title}</h3>
+  </div>
+  <p class="servicio-card-desc" set:html={description}></p>
+</div>
+<style>
+.servicio-card {
+  background: var(--color-accent-light);
+  border-radius: 18px;
+  box-shadow: 0 2px 16px 0 rgba(17,138,178,0.08);
+  padding: 2em 1.5em;
+  margin: 0.5em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  border: 2px solid transparent;
+  outline: none;
+  color : var(--color-almost-black, #222);
+}
+.servicio-card.active,
+.servicio-card:active {
+  background: #ef476f;
+  color: #fff;
+  border-color: #ef476f;
+}
+.servicio-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.servicio-card-icon-row {
+  width: 120%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.2em;
+}
+.servicio-card-icon {
+  font-size: 1.25em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.servicio-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1.5px solid var(--color-accent-light);
+  padding: 1.7em 1.3em 1.5em 1.3em;
+  margin: 0.7em;
+  color: var(--color-almost-black, #222);
+  transition: border 0.18s, color 0.18s, background 0.18s;
+  outline: none;
+  box-shadow: none;
+}
+.servicio-card-yellow {
+  background: var(--color-secondary-light);
+  border-color: var(--color-secondary);
+}
+.servicio-card-pink {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+.servicio-card-blue {
+  background: var(--color-info-light);
+  border-color: var(--color-info);
+}
+
+</style>

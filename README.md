@@ -1,45 +1,41 @@
-# Astro Starter Kit: Basics
+# Web Personal de Experta en Growth Marketing
 
-```sh
-npm create astro@latest -- --template basics
-```
+Este proyecto es una web personal construida con [Astro](https://astro.build/) para una experta en growth marketing.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Estructura principal
 
-## 🚀 Project Structure
+- **Inicio** (`/`): Presentación y propuesta de valor.
+- **Sobre mí** (`/sobre-mi`): Biografía y experiencia profesional.
+- **Servicios** (`/servicios`): Oferta de servicios de growth marketing.
+- **Portafolio** (`/portafolio`): Proyectos y casos de éxito.
+- **Blog** (`/blog`): Artículos y recursos.
+- **Contacto** (`/contacto`): Formulario y datos de contacto.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Contenido dinámico
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+- Los artículos del blog y los proyectos del portafolio se gestionan mediante archivos Markdown en `src/content/blog` y `src/content/portafolio`.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Comenzar
 
-## 🧞 Commands
+1. Instala dependencias:
+   ```sh
+   npm install
+   ```
+2. Inicia el servidor de desarrollo:
+   ```sh
+   npm run dev
+   ```
 
-All commands are run from the root of the project, from a terminal:
+## Personalización
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- Agrega o edita archivos Markdown en las carpetas de contenido para actualizar el blog y el portafolio.
+- Personaliza los componentes y estilos en `src/components` y `src/styles`.
+
+---
+
+Proyecto inicializado el 12 de octubre de 2025.
+| `npm run astro ...` | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI |
 
 ## 👀 Want to learn more?
 

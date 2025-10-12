@@ -1,0 +1,44 @@
+---
+// Componente Input Astro puro
+export interface Props {
+  label: string;
+  name: string;
+  type?: string;
+  value?: string;
+  required?: boolean;
+}
+const { label, name, value = '', required = false } = Astro.props as {
+  label: string;
+  name: string;
+  value?: string;
+  required?: boolean;
+};
+let type: string | undefined = Astro.props.type ?? 'text';
+if (type === null || type === '') type = undefined;     
+---
+<label class="input-label">
+  {label}
+  <input name={name} type={type as any} value={value} required={required} class="input-field" />
+</label>
+<style>
+@import "../styles/palette.css";
+.input-label {
+  display: block;
+  margin-bottom: 1em;
+  color: var(--color-dark);
+  font-weight: 500;
+}
+.input-field {
+  width: 100%;
+  padding: 0.5em 1em;
+  border: 1px solid var(--color-info);
+  border-radius: 4px;
+  font-size: 1.25em;
+  margin-top: 0.3em;
+  transition: border 0.2s;
+}
+.input-field:focus {
+  border: 2px solid var(--color-primary);
+  outline: none;
+}
+</style>

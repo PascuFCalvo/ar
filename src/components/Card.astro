@@ -1,0 +1,46 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  link?: string;
+}
+const { title, description, image, link } = Astro.props;
+---
+<article class="card">
+  {image && <img src={image} alt={title} class="card-img" />}
+  <div class="card-content">
+    <h2>{title}</h2>
+    <p>{description}</p>
+    {link && <a href={link} class="card-link">Ver más</a>}
+  </div>
+</article>
+<style>
+@import "../styles/palette.css";
+.card {
+  background: #fff;
+  border: 1px solid var(--color-info);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(7,59,76,0.08);
+  overflow: hidden;
+  max-width: 350px;
+  margin: 1em auto;
+}
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: var(--color-secondary);
+}
+.card-content {
+  padding: 1em;
+}
+.card-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  font-weight: bold;
+}
+.card-link:hover {
+  color: var(--color-accent);
+}
+</style>

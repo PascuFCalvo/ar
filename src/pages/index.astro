@@ -1,11 +1,231 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import SobreMi from './sobre-mi.astro';
+import Servicios from './servicios.astro';
+import Trabajos from './trabajo.astro';
+import MiExperiencia from './miexperiencia.astro';
+import Clientes from './clientes.astro';
+import Charlas from './charlas.astro';	
+import FooterPink from '../components/FooterPink.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const links = [
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Lo que hago', href: '#loquehago' },
+  { label: 'Casos de éxito', href: '#casosdeexito' },
+  { label: 'Experiencia', href: '#experiencia' },
+];
 ---
 
 <Layout>
-	<Welcome />
-</Layout>
+  <Navbar links={links} />
+  <section id="inicio" class="hero-main hero-yellow">
+  <!-- Degradado eliminado -->
+    <div class="hero-content-main">
+      <h1 class="hero-title-main">Ana Ruiz</h1>
+      <h2 class="hero-title-main hero-title-secondary">Especialista en Growth Marketing</h2>
+      <div class="hero-subtitles-group">
+        <p class="hero-subtitle-main">Estoy aquí para darle sentido común a tu estrategia y moverla contigo
+        <span class="hero-subtitle-secondary">
+          <span style="color: var(--color-info)">Estrategia</span> · 
+          <span style="color: var(--color-info)">IA</span> · 
+          <span style="color: var(--color-info)">Procesos</span> · 
+          <span style="color: var(--color-info)">Crecimiento</span> · 
+          <span style="color: var(--color-info)">Sentido común</span>
+        </span>
+        </p>
+      </div>
+    </div>
+    <!-- Imagen del hero eliminada -->
+  </section>
+
+  <SobreMi />
+
+  <section id="servicios">
+    <Servicios />
+  </section>
+  <section id="loquehago"></section>
+
+  <section id="casosdeexito">
+    <Trabajos />
+  </section>
+  
+  <section id="experiencia">
+    <MiExperiencia />
+  </section>
+
+  <section id="charlas">
+     <Charlas />
+  </section>
+
+  <Clientes />
+  <section id="contacto-final"></section>
+
+  <FooterPink />
+<style>
+  .hero-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: url('../../src/images/anahero.jpg') center center/cover no-repeat;
+    padding: 3em 2em;
+    margin-bottom: 0;
+    min-height: 350px;
+    gap: 2em;
+    box-sizing: border-box;
+    border-radius: 0;
+    position: relative;
+    z-index: 3;
+    height: 600px;
+  }
+  .hero-yellow {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  .hero-content-main {
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-title-main {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-size: 3.6em;
+    font-weight: 800;
+    margin: 0 0 0.1em 0;
+    line-height: 1.02;
+    color: #222;
+    letter-spacing: -1px;
+  }
+  .hero-title-secondary {
+    font-size: 2.2em;
+    font-weight: 600;
+    margin: 0 0 0.5em 0;
+    color: #222;
+    letter-spacing: 0.5px;
+  }
+  .hero-subtitles-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-top: 1.2em;
+    margin-bottom: 0;
+    min-height: 90px;
+  }
+  .hero-subtitle-main {
+    font-size: 1.25em;
+    color: #444;
+    margin: 0;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2em;
+  }
+  .hero-subtitle-secondary {
+    font-size: 1.25em;
+    color: #b0b0b0;
+    margin: 0;
+    font-weight: 400;
+    display: block;
+  }
+  .about-section {
+    display: flex;
+    gap: 2em;
+    align-items: flex-start;
+    margin: 3em 0 2em 0;
+    min-height: 180px;
+  }
+  .about-col {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .about-title-col {
+    justify-content: flex-start;
+    padding-right: 0;
+  }
+  .about-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 2px;
+    margin: 0;
+    text-align: right;
+  }
+  .about-desc-col {
+    justify-content: flex-start;
+    padding-left: 2em;
+  }
+  .about-desc {
+    font-size: 1.25em;
+    color: #222;
+    margin: 0;
+    line-height: 1.6;
+    text-align: left;
+  }
+  @media (max-width: 900px) {
+    .about-section {
+      flex-direction: column;
+      gap: 1em;
+    }
+    .about-title-col, .about-desc-col {
+      justify-content: center;
+      padding: 0;
+    }
+    .about-title {
+      text-align: left;
+    }
+    .about-desc {
+      text-align: left;
+    }
+  }
+  .hero-img-main {
+    flex: 1 1 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-img-main img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: #fff;
+    border: 6px solid #fff;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  }
+  @media (max-width: 900px) {
+    .hero-main {
+      flex-direction: column;
+      text-align: center;
+      padding: 2em 1em;
+    }
+    .hero-img-main {
+      margin-top: 2em;
+    }
+  }
+  .section-bg {
+    background: #fff;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 32px rgba(7,59,76,0.06);
+    padding: 2.5em 2em;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .overlap-section {
+    margin-top: -36px;
+    box-shadow: 0 8px 32px rgba(7,59,76,0.10);
+  }
+  .about-overlap-fix {
+    margin-top: -24px !important;
+  }
+</style>
+ </Layout>
+
+

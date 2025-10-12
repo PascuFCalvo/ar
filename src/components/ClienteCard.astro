@@ -1,0 +1,42 @@
+---
+export interface Props {
+  text: string;
+  name: string;
+  role: string;
+  color?: 'yellow' | 'pink' | 'blue' | 'green'
+}
+const { text, name, role, color = 'pink' } = Astro.props;
+---
+
+
+<style>
+.cliente-card.cliente-quote {
+  background: var(--color-primary-light, #ffd6e6);
+  padding: 2em 1.5em;
+  border-radius: 18px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+.cliente-card.cliente-quote.cliente-card-yellow {
+  background: var(--color-secondary) !important;
+  color: var(--color-almost-black) !important;
+}
+.cliente-card.cliente-quote.cliente-card-green {
+  background: var(--color-accent) !important;
+  color: var(--color-almost-white) !important;
+}
+.cliente-card.cliente-quote.cliente-card-blue {
+  background: var(--color-info) !important;
+  color: var(--color-almost-white) !important;
+}
+</style>
+<div class={`cliente-card cliente-quote cliente-card-${color}`}> 
+  <span class="cliente-quote-icon">“</span>
+  <p class="cliente-quote-text">{text}</p>
+  <span class="cliente-quote-icon">“</span>
+  <div class="cliente-quote-author">
+    <span class="cliente-quote-name">{name}</span><br />
+    <span class="cliente-quote-role">{role}</span>
+  </div>
+</div>

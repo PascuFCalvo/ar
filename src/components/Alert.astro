@@ -1,0 +1,26 @@
+---
+export interface Props {
+  message: string;
+  type?: 'success' | 'error' | 'info' | 'warning';
+}
+const { message, type = 'info' } = Astro.props;
+const colorMap = {
+  success: 'var(--color-accent)',
+  error: 'var(--color-primary)',
+  info: 'var(--color-info)',
+  warning: 'var(--color-secondary)'
+};
+---
+<div class="alert" style={`border-left: 6px solid ${colorMap[type]}`}>{message}</div>
+<style>
+@import "../styles/palette.css";
+.alert {
+  background: #fff;
+  color: var(--color-dark);
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(7,59,76,0.06);
+  font-size: 1.25em;
+}
+</style>

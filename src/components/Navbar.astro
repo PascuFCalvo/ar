@@ -1,0 +1,119 @@
+---
+export interface Props {
+  links: { label: string; href: string }[];
+}
+const { links } = Astro.props;
+---
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <ul>
+      {links.map(link => (
+        <li><a href={link.href}>{link.label}</a></li>
+      ))}
+    </ul>
+    <a href="#" class="navbar-contact-btn" id="navbar-contact-btn">CONTACTO</a>
+  </div>
+</nav>
+
+<script>
+  const navbarContactBtn = document.getElementById('navbar-contact-btn');
+  navbarContactBtn?.addEventListener('click', function(e) {
+    e.preventDefault();
+    const modalBg = document.getElementById('contact-modal-bg');
+    if (modalBg) {
+      modalBg.classList.add('active');
+    }
+  });
+</script>
+
+<style>
+  @import "../styles/palette.css";
+
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
+  .navbar {
+    background: #18191a;
+    padding: 1em 0;
+  }
+
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2vw;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .navbar ul {
+    display: flex;
+    gap: 2em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar li {
+    margin: 0;
+  }
+
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.25em;
+    transition: color 0.2s;
+  }
+
+  .navbar a:hover {
+    color: var(--color-secondary);
+  }
+
+  .navbar-contact-btn {
+    margin-left: 2em;
+    padding: 0.5em 1.5em;
+    border: 2px solid var(--color-info);
+    border-radius: 24px;
+    background: var(--color-info);
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    cursor: pointer;
+    display: inline-block;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1002;
+  }
+
+  .navbar-contact-btn:hover {
+    background: var(--color-info-dark);
+    border-color: var(--color-info-dark);
+    color: #fff !important;
+  }
+
+  @media (max-width: 900px) {
+    .navbar-inner {
+      flex-direction: column;
+      gap: 1em;
+      padding: 1em 2vw;
+    }
+
+    .navbar ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
+    }
+
+    .navbar-contact-btn {
+      margin-left: 0;
+    }
+  }
+</style>

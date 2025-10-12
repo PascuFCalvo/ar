@@ -1,0 +1,28 @@
+---
+// Componente Button Astro puro
+export interface Props {
+  label: string;
+  type?: 'button' | 'submit' | 'reset';
+  // Puedes pasar otros props como disabled, etc.
+}
+const { label, type = 'button', ...rest } = Astro.props;
+---
+<button type={type} class="btn" {...rest}>
+  {label}
+</button>
+<style>
+@import "../styles/palette.css";
+.btn {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn:hover {
+  background: var(--color-accent);
+}
+</style>
