@@ -43,3 +43,23 @@ const { title, subtitle, image } = Astro.props;
   font-size: 1.25em;
 }
 </style>
+<style>
+@media (max-width: 600px) {
+  .hero {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .hero-img {
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50%;
+  }
+}
+</style>
