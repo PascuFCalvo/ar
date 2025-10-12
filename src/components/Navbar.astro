@@ -93,9 +93,9 @@ const { links } = Astro.props;
       border-radius: 0;
       box-sizing: border-box;
       overflow-x: hidden;
-    }
       padding: 1em 2vw;
     }
+    
     .navbar-burger {
       display: flex;
     }
@@ -115,7 +115,7 @@ const { links } = Astro.props;
       align-items: center;
       height: 100%;
     }
-    }
+    
     .navbar-menu.open {
       max-height: 400px;
       opacity: 1;
@@ -125,7 +125,7 @@ const { links } = Astro.props;
       margin-left: 0;
       z-index: 1002;
     }
-  }
+  
 
   :global(html) {
     scroll-behavior: smooth;
@@ -160,6 +160,7 @@ const { links } = Astro.props;
   .navbar li {
     margin: 0;
   }
+}
     @media (min-width: 901px) {
       .navbar-burger {
         display: none !important;
@@ -236,6 +237,7 @@ const { links } = Astro.props;
     border-color: var(--color-info-dark);
     color: #fff !important;
   }
+}
 
   @media (max-width: 900px) {
     .navbar-inner {
@@ -266,7 +268,6 @@ const { links } = Astro.props;
       .navbar-menu.open li a {
         padding: 0.7em 0.5em;
         display: block;
-      }
         border-radius: 16px !important;
         min-width: unset !important;
         max-width: 90vw !important;
@@ -297,5 +298,6 @@ const { links } = Astro.props;
       left: 0 !important;
     }
   }
+  
   
 </style>
