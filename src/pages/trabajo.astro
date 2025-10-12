@@ -9,19 +9,19 @@ import TrabajoCard from '../components/TrabajoCard.astro'; // Ensure this file e
   </div>
   <div class="trabajo-gallery">
     <TrabajoCard 
-      image="../../src/images/DoosBox.jpg" 
+  image="/images/DoosBox.jpg" 
       alt="Doos Box" 
       title="📦 Doos Box" 
       description="Doos Box capta clientes por correo y llamadas, pero no tenía una forma clara de organizar todo ese proceso.\nLa búsqueda de nuevos clientes y la planificación se le hacía bola.\nTrabajé en ordenar su proceso de captación, estructurar mejor la planificación y marcar una estrategia sencilla de email marketing.\nPróximamente…\nAhora estamos trabajando en que la creación de contenido no le quite la vida y pueda centrarse en lo que de verdad importa: vender. Estamos aprendiendo y pronto se verán los resultados." 
     />
     <TrabajoCard 
-      image="../../src/images/Dualcillo.jpg" 
+  image="/images/Dualcillo.jpg" 
       alt="Dualcillo" 
       title="👤 Dualcillo (marca personal)" 
       description="He tenido el privilegio de guiar y apoyar a Juan (Dualcillo) en su estrategia de comunicación y marketing digital.\nJuntos hemos trabajado en:\n- Desarrollar estrategias para conectar con su audiencia.\n- Fortalecer su imagen personal.\n- Alinear sus mensajes con su visión y objetivos.\n- Aprender a tener constancia y organizarse.\n\nEn un año pasamos de menos de 10k seguidores a superar esa cifra y seguir creciendo de forma constante.\nAhora me siento un poco como una madre con el nido vacío: Juan ya vuela solo, y yo quedo como apoyo y amiga, feliz de verlo y estar." 
     />
     <TrabajoCard
-      image="../../src/images/Streamion.jpg"
+  image="/images/streamion.jpg"
       alt="Streamion"
       title="🚀 Streamion"
       description="Streamion es una startup de tecnología que conecta marcas con creadores de contenido en streaming.\nColaboré en la definición de su estrategia de crecimiento y en la optimización de su embudo de captación de partners.\n\nTrabajamos en: \n- Mejorar la comunicación de valor para atraer tanto a marcas como a streamers.\n- Implementar procesos sencillos para escalar la captación sin perder el trato personal.\n- Analizar métricas clave para tomar decisiones rápidas y efectivas.\n\nEl resultado: Streamion multiplicó por dos su red de creadores y consiguió cerrar acuerdos con marcas relevantes en menos de seis meses.\n\nUn proyecto donde la agilidad y la creatividad han sido la clave para crecer en un sector tan dinámico como el streaming."
@@ -57,17 +57,43 @@ import TrabajoCard from '../components/TrabajoCard.astro'; // Ensure this file e
   font-size: 1.25em;
   margin: 0.5em 0 0 0;
 }
-.trabajo-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(250px, 1fr));
-  grid-template-rows: repeat(2, minmax(200px, auto));
-  gap: 2em;
-  max-width: 1600px;
-  margin: 0 auto;
-}
+  .trabajo-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    grid-template-rows: repeat(2, minmax(200px, auto));
+    gap: 2em;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) {
+    .trabajo-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2em;
+      max-width: 800px;
+    }
+  }
+  @media (max-width: 600px) {
+    .trabajo-section {
+      padding: 2em 1vw;
+    }
+    .trabajo-header h2 {
+      font-size: 1.3em;
+    }
+    .trabajo-header p {
+      font-size: 1em;
+    }
+    .trabajo-gallery {
+      gap: 1em;
+      min-height: 120vh;
+      overflow-y: auto;
+    }
+  }
 .trabajo-gallery > * {
+  width: 100%;
   min-width: 0;
   min-height: 0;
+  box-sizing: border-box;
 }
 .gallery-item {
   background: #fff;

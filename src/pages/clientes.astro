@@ -52,6 +52,174 @@ import ClienteCard from '../components/ClienteCard.astro';
   </form>
 </div>
 
+<style>
+  .clientes-section {
+    padding: 4em 2vw;
+    background: var(--color-primary, #fdc5c4);
+    box-sizing: border-box;
+    color: var(--color-accent, #03a67b);
+  }
+  .clientes-title {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    color: var(--color-accent, #03a67b);
+    text-align: center;
+  }
+  .clientes-desc {
+    text-align: center;
+    color: var(--color-accent, #03a67b);
+    margin-bottom: 2.5em;
+    font-size: 1.25em;
+  }
+  .clientes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2em;
+    max-width: 1200px;
+    margin: 0 auto 3em auto;
+  }
+  @media (max-width: 900px) {
+    .clientes-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5em;
+    }
+  }
+  .contact-section {
+    background: var(--color-primary-light, #ffe0e0);
+    padding: 3em 2vw;
+    border-radius: 0;
+    margin: 2em auto 0 auto;
+    max-width: 700px;
+    box-shadow: 0 2px 16px 0 rgba(17,138,178,0.08);
+    text-align: center;
+  }
+  .contact-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--color-accent, #03a67b);
+    margin-bottom: 0.5em;
+  }
+  .contact-desc {
+    color: var(--color-accent, #03a67b);
+    margin-bottom: 1.5em;
+    font-size: 1.1em;
+  }
+  .contact-btn {
+    background: var(--color-accent, #03a67b);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.7em 1.5em;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-bottom: 1em;
+    transition: background 0.2s;
+  }
+  .contact-btn:hover {
+    background: var(--color-primary, #fdc5c4);
+    color: var(--color-dark, #073b4c);
+  }
+  .ana-ruiz-big {
+    font-size: 3.5em;
+    font-weight: 900;
+    color: var(--color-accent, #03a67b);
+    margin-top: 1.5em;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+  /* Modal styles */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-bg.active {
+    display: flex;
+  }
+  .contact-modal {
+    background: #fff;
+    border-radius: 18px;
+    padding: 2em 1.5em;
+    max-width: 400px;
+    width: 90vw;
+    box-shadow: 0 2px 16px 0 rgba(17,138,178,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .contact-modal label {
+    font-weight: 600;
+    color: var(--color-dark, #073b4c);
+    margin-bottom: 0.2em;
+    text-align: left;
+  }
+  .contact-modal input, .contact-modal textarea {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.5em;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .contact-modal button[type="submit"] {
+    background: var(--color-accent, #03a67b);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.7em 1.5em;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 1em;
+    transition: background 0.2s;
+  }
+  .contact-modal button[type="submit"]:hover {
+    background: var(--color-primary, #fdc5c4);
+    color: var(--color-dark, #073b4c);
+  }
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #888;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    cursor: pointer;
+  }
+  @media (max-width: 600px) {
+    .clientes-section {
+      padding: 2em 1vw;
+    }
+    .clientes-title {
+      font-size: 1.3em;
+    }
+    .clientes-desc {
+      font-size: 1em;
+    }
+    .clientes-grid {
+      grid-template-columns: 1fr;
+      gap: 1em;
+    }
+    .contact-section {
+      padding: 1.5em 1vw;
+    }
+    .contact-title {
+      font-size: 1.1em;
+    }
+    .ana-ruiz-big {
+      font-size: 1.5em;
+    }
+    .contact-modal {
+      padding: 1em 0.5em;
+      max-width: 98vw;
+    }
+  }
+</style>
 <script>
   const contactBtn = document.getElementById('contact-btn');
   const contactLink = document.getElementById('contact-link');

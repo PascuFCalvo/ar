@@ -44,10 +44,17 @@ import ServicioCard from '../components/ServicioCard.astro';
 .servicios-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(1, auto);
-  gap: 5px;
+  gap: 1.5em;
   max-width: 1300px;
   margin: 0 auto;
   overflow: visible;
+}
+@media (max-width: 900px) {
+  .servicios-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    max-width: 600px;
+  }
 }
 </style>

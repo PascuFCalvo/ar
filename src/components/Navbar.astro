@@ -5,9 +5,13 @@ export interface Props {
 const { links } = Astro.props;
 ---
 
+
 <nav class="navbar">
   <div class="navbar-inner">
-    <ul>
+    <button class="navbar-burger" id="navbar-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navbar-menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="navbar-menu" class="navbar-menu">
       {links.map(link => (
         <li><a href={link.href}>{link.label}</a></li>
       ))}
@@ -25,10 +29,94 @@ const { links } = Astro.props;
       modalBg.classList.add('active');
     }
   });
+
+  const burger = document.getElementById('navbar-burger');
+  const menu = document.getElementById('navbar-menu');
+  if (burger && menu) {
+    burger.addEventListener('click', function() {
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('open');
+      burger.classList.toggle('open');
+    });
+  }
 </script>
 
 <style>
   @import "../styles/palette.css";
+
+  .navbar-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1003;
+    margin-right: 1em;
+  }
+  .navbar-burger span {
+    display: block;
+    width: 28px;
+    height: 4px;
+    margin: 4px 0;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+  .navbar-burger.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .navbar-burger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .navbar-burger.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .navbar-menu {
+    display: flex;
+    gap: 2em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: max-height 0.3s, opacity 0.3s;
+  }
+  @media (max-width: 900px) {
+    .navbar-inner {
+      flex-direction: row;
+      gap: 0.5em;
+      padding: 1em 2vw;
+    }
+    .navbar-burger {
+      display: flex;
+    }
+    .navbar-menu {
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100vw;
+      background: #18191a;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      z-index: 1001;
+      box-shadow: 0 8px 32px rgba(7,59,76,0.10);
+      transition: max-height 0.3s, opacity 0.3s;
+    }
+    .navbar-menu.open {
+      max-height: 400px;
+      opacity: 1;
+      padding: 1em 0;
+    }
+    .navbar-contact-btn {
+      margin-left: 0;
+      z-index: 1002;
+    }
+  }
 
   :global(html) {
     scroll-behavior: smooth;
@@ -48,6 +136,8 @@ const { links } = Astro.props;
     padding: 0 2vw;
     width: 100%;
     box-sizing: border-box;
+    min-height: 56px;
+    position: relative;
   }
 
   .navbar ul {
@@ -87,7 +177,9 @@ const { links } = Astro.props;
     letter-spacing: 1px;
     transition: background 0.2s, color 0.2s, border-color 0.2s;
     cursor: pointer;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    height: 40px;
     flex-shrink: 0;
     position: relative;
     z-index: 1002;
@@ -101,19 +193,17 @@ const { links } = Astro.props;
 
   @media (max-width: 900px) {
     .navbar-inner {
-      flex-direction: column;
-      gap: 1em;
+      flex-direction: row;
+      gap: 0.5em;
       padding: 1em 2vw;
+      align-items: center;
+      min-height: 56px;
     }
-
-    .navbar ul {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1em;
-    }
-
     .navbar-contact-btn {
       margin-left: 0;
+      display: flex;
+      align-items: center;
+      height: 40px;
     }
   }
 </style>

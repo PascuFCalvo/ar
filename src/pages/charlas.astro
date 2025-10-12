@@ -45,7 +45,7 @@
   height: 100%;
   margin: 0;
   padding: 2em 2em;
-  background: linear-gradient(to right, var(--color-info-dark, #2980b9) 40%, transparent 40%), url('/src/images/anacharla.jpg') right center/60% 100% no-repeat;
+  background: linear-gradient(to right, var(--color-info-dark, #2980b9) 40%, transparent 40%), url('/images/anacharla.jpg') right center/60% 100% no-repeat;
   border-radius: 0;
   box-shadow: none;
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
@@ -80,12 +80,38 @@
   margin-right: 0.7em;
   line-height: 1.2;
 }
+.charlas-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+@media (max-width: 900px) {
+  .charlas-section {
+    background: var(--color-info-dark, #2980b9) !important;
+  }
   .charlas-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
-    justify-content: center;
-    margin-bottom: 2em;
+    flex-direction: column;
+    gap: 1.2em;
+    align-items: center;
+  }
+  .charla-card {
+    min-width: 0;
+    max-width: 98vw;
+    width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .charlas-section {
+    padding: 1.2em 0.5em;
+  }
+  .charla-card {
+    padding: 1em 0.5em;
+  }
+  .charlas-section h1 {
+      font-size: 1.1em;
+    }
   }
     .charla-card {
       background: var(--color-info, #2980b9);

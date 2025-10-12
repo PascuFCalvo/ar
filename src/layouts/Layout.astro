@@ -42,15 +42,22 @@
 		filter: blur(2px) brightness(1.08);
 		transition: background 0.8s ease;
 	}
-	.main-container {
-		margin: 5px auto;
-		box-sizing: border-box;
-		min-height: 100vh;
-		max-width: 1600px;
-		width: 100%;
-		position: relative;
-		z-index: 1;
-	}
+		.main-container {
+			margin: 0 auto;
+			box-sizing: border-box;
+			min-height: 100vh;
+			max-width: 1600px;
+			width: 100%;
+			position: relative;
+			z-index: 1;
+		}
+			@media (max-width: 900px) {
+				html, body, .main-container {
+					margin-top: 0 !important;
+					padding-top: 0 !important;
+				}
+					/* Revertido: sin padding lateral en móvil */
+			}
 </style>
 
 <script>

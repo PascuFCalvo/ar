@@ -39,7 +39,7 @@
           </li>
         </ul>
         <div class="exp-card-photo-vertical">
-          <img src="../../src/images/ana2corta.png" alt="Portrait Experience Photo" />
+          <img src="/images/ana2corta.png" alt="Portrait Experience Photo" />
         </div>
         <ul class="exp-experience-list">
           <li>
@@ -260,6 +260,34 @@
   }
   .exp-card, .exp-card-photo, .exp-timeline {
     grid-column: auto;
+  }
+  .exp-experience-center-white {
+    grid-template-columns: 1fr;
+    gap: 1em;
+    padding: 1em 0.5em;
+  }
+  .exp-card-photo-vertical img {
+    width: 90vw;
+    height: auto;
+    max-width: 320px;
+    min-width: 120px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+@media (max-width: 600px) {
+  .experiencia-section {
+    padding: 2em 1vw;
+  }
+  .experiencia-title {
+    font-size: 1.3em;
+  }
+  .experiencia-desc {
+    font-size: 1em;
+  }
+  .exp-card {
+    padding: 1em 0.5em;
+    min-height: 320px;
   }
 }
 </style>
