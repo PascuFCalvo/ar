@@ -81,14 +81,16 @@ const { title, description, icon, color = 'yellow' } = Astro.props;
     width: 100vw !important;
     max-width: 100vw !important;
     border-radius: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin: 0 !important;
     box-sizing: border-box;
     padding-left: 0.5em;
     padding-right: 0.5em;
+    overflow-x: hidden !important;
   }
   .servicio-card-icon-row {
-    width: 100% !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
   }
 }
 </style>
