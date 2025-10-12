@@ -218,7 +218,6 @@ import ClienteCard from '../components/ClienteCard.astro';
   }
 </style>
 <script>
-  const contactBtn = document.getElementById('contact-btn');
   const contactLink = document.getElementById('contact-link');
   const modalBg = document.getElementById('contact-modal-bg');
   const closeModal = document.getElementById('close-modal');
@@ -242,10 +241,6 @@ import ClienteCard from '../components/ClienteCard.astro';
     }
   }
 
-  // Abrir modal con los botones
-  if (contactBtn) {
-    contactBtn.addEventListener('click', openContactModal);
-  }
 
   if (contactLink) {
     contactLink.addEventListener('click', openContactModal);
