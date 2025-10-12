@@ -6,7 +6,25 @@
 @media (max-width: 600px) {
   html,
   body,
-  * {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  li,
+  div,
+  section,
+  article,
+  span,
+  a,
+  label,
+  input,
+  textarea,
+  button {
     text-align: left !important;
   }
 }
