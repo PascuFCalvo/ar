@@ -34,9 +34,6 @@ import ClienteCard from '../components/ClienteCard.astro';
   <div class="ana-ruiz-big">Ana Ruiz</div>
 </section>
 
-<button id="contact-btn" class="modal-trigger-btn" type="button" aria-label="Abrir formulario de contacto">
-  Contacto
-</button>
 
 <div id="contact-modal-bg" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <form class="contact-modal" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
@@ -419,56 +416,7 @@ import ClienteCard from '../components/ClienteCard.astro';
   }
 
   /* Modal */
-  .modal-trigger-btn {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--color-primary, #ff4f8b);
-    color: var(--color-accent, #222);
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s, box-shadow 0.2s;
-    z-index: 999;
-  }
-
-  .modal-trigger-btn {
-    position: fixed;
-    bottom: 2em;
-    right: 2em;
-    z-index: 1100;
-    background: var(--color-accent, #03a67b);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    font-size: 1.5em;
-    box-shadow: 0 2px 8px 0 rgba(17,138,178,0.12);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    max-width: 90vw;
-    box-sizing: border-box;
-  }
-  @media (max-width: 600px) {
-    .modal-trigger-btn {
-      right: 1em;
-      left: auto;
-      max-width: 60px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      padding: 0;
-      margin: 0;
-    }
-  }
+  /* .modal-trigger-btn styles removed */
     justify-content: center;
     z-index: 1000;
     backdrop-filter: blur(2px);
