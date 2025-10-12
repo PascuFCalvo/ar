@@ -18,9 +18,16 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
   <div class="gallery-caption-overlay">
     {(subtitle || description) ? (
       <>
+        <input type="checkbox" id={uniqueId} class="expand-checkbox" />
         <div class="gallery-title-row">
           <strong class="gallery-title">{title}</strong>
-          <button class="expand-btn" tabindex="0" aria-label="Mostrar más" id={uniqueId + '-btn'}>
+          <label for={uniqueId} class="expand-btn desktop-only" tabindex="0" aria-label="Mostrar más">
+            <span class="expand-btn-icon">
+              <span class="plus">+</span>
+              <span class="minus">−</span>
+            </span>
+          </label>
+          <button class="expand-btn mobile-only" tabindex="0" aria-label="Mostrar más" id={uniqueId + '-btn'}>
             <span class="expand-btn-icon">
               <span class="plus">+</span>
             </span>
@@ -98,12 +105,19 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
 <style>
   /* Oculta el extra-text en móvil, visible solo en desktop */
+
   .desktop-only {
     display: block;
+  }
+  .mobile-only {
+    display: none;
   }
   @media (max-width: 600px) {
     .desktop-only {
       display: none !important;
+    }
+    .mobile-only {
+      display: inline-flex;
     }
   }
 
