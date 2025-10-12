@@ -1,11 +1,11 @@
 // This file will contain the popup logic for mobile view for TrabajoCard
-export function showPopup(content, onClose) {
+function showPopup(content, onClose) {
   // Create overlay
   const overlay = document.createElement("div");
   overlay.className = "trabajo-popup-overlay";
   overlay.onclick = (e) => {
     if (e.target === overlay) {
-      onClose();
+      if (typeof onClose === "function") onClose();
       document.body.removeChild(overlay);
     }
   };
@@ -20,7 +20,7 @@ export function showPopup(content, onClose) {
   closeBtn.className = "trabajo-popup-close";
   closeBtn.innerText = "×";
   closeBtn.onclick = () => {
-    onClose();
+    if (typeof onClose === "function") onClose();
     document.body.removeChild(overlay);
   };
   popup.appendChild(closeBtn);
@@ -28,3 +28,5 @@ export function showPopup(content, onClose) {
   overlay.appendChild(popup);
   document.body.appendChild(overlay);
 }
+
+window.showPopup = showPopup;
