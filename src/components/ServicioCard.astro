@@ -14,6 +14,16 @@ const { title, description, icon, color = 'yellow' } = Astro.props;
     <button class="servicio-toggle-btn mobile-only" aria-label="Mostrar más" onclick="this.parentElement.parentElement.classList.toggle('show-desc')">
       <span class="servicio-toggle-icon">+</span>
     </button>
+<style>
+  .mobile-only {
+    display: none;
+  }
+  @media (max-width: 600px) {
+    .mobile-only {
+      display: inline-flex !important;
+    }
+  }
+</style>
   </div>
   <p class="servicio-card-desc" set:html={description}></p>
 </div>
