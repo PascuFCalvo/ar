@@ -24,13 +24,13 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
             type="button"
             tabindex="0"
             aria-label="Mostrar más"
-            onClick={() => {
+            onclick={() => {
               if (window.innerWidth <= 600) {
                 const modal = document.getElementById(`trabajo-modal-${uniqueId}`);
                 if (modal) modal.classList.add('active');
               } else {
                 const checkbox = document.getElementById(uniqueId);
-                if (checkbox) checkbox.checked = !checkbox.checked;
+                if (checkbox instanceof HTMLInputElement) checkbox.checked = !checkbox.checked;
               }
             }}
           >
@@ -53,17 +53,27 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
           </div>
         </div>
         {/* Modal for mobile */}
-        <div class="trabajo-modal" id={`trabajo-modal-${uniqueId}`} tabindex="-1">
-          <div class="trabajo-modal-content">
-            <button class="trabajo-modal-close" type="button" aria-label="Cerrar" onClick={() => {
-              const modal = document.getElementById(`trabajo-modal-${uniqueId}`);
-              if (modal) modal.classList.remove('active');
-            }}>×</button>
-            <div class="trabajo-modal-title">{title}</div>
-            {subtitle && <div class="trabajo-modal-subtitle">{subtitle}</div>}
-            {description && <div class="trabajo-modal-description">{description}</div>}
-          </div>
-        </div>
+      </>
+    ) : (
+      <div class="gallery-title-row">
+        <strong class="gallery-title">{title}</strong>
+      </div>
+    )}
+    {/* Modal for mobile (must be outside style) */}
+  </div>
+  {(subtitle || description) && (
+    <div class="trabajo-modal" id={`trabajo-modal-${uniqueId}`} tabindex="-1">
+      <div class="trabajo-modal-content">
+        <button class="trabajo-modal-close" type="button" aria-label="Cerrar" onclick={() => {
+          const modal = document.getElementById(`trabajo-modal-${uniqueId}`);
+          if (modal) modal.classList.remove('active');
+        }}>×</button>
+        <div class="trabajo-modal-title">{title}</div>
+        {subtitle && <div class="trabajo-modal-subtitle">{subtitle}</div>}
+        {description && <div class="trabajo-modal-description">{description}</div>}
+      </div>
+    </div>
+  )}
       </>
     ) : (
       <div class="gallery-title-row">
@@ -72,6 +82,7 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
     )}
   </div>
 </div>
+<style>
   /* Modal for mobile */
   .trabajo-modal {
     display: none;
