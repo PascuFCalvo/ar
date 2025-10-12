@@ -436,25 +436,34 @@ import ClienteCard from '../components/ClienteCard.astro';
     z-index: 999;
   }
 
-  .modal-trigger-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  .modal-trigger-btn:focus {
-    outline: 2px solid var(--color-primary, #ff4f8b);
-    outline-offset: 2px;
-  }
-
-  .modal-bg {
+  .modal-trigger-btn {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
+    bottom: 2em;
+    right: 2em;
+    z-index: 1100;
+    background: var(--color-accent, #03a67b);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.5em;
+    box-shadow: 0 2px 8px 0 rgba(17,138,178,0.12);
+    cursor: pointer;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    max-width: 90vw;
+    box-sizing: border-box;
+  }
+  @media (max-width: 600px) {
+    .modal-trigger-btn {
+      right: 1em;
+      left: auto;
+      max-width: 60px;
+    }
+  }
     justify-content: center;
     z-index: 1000;
     backdrop-filter: blur(2px);
