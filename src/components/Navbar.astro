@@ -6,45 +6,74 @@ const { links } = Astro.props;
 ---
 
 
+
 <nav class="navbar">
   <div class="navbar-inner">
-    <button class="navbar-burger" id="navbar-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navbar-menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul id="navbar-menu" class="navbar-menu">
-      {links.map(link => (
-        <li><a href={link.href}>{link.label}</a></li>
-      ))}
-    </ul>
+    <div class="navbar-left">
+      <button class="navbar-burger" id="navbar-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navbar-menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="navbar-menu" class="navbar-menu">
+        {links.map(link => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
     <a href="#" class="navbar-contact-btn" id="navbar-contact-btn">CONTACTO</a>
   </div>
 </nav>
 
 <script>
-  const navbarContactBtn = document.getElementById('navbar-contact-btn');
-  navbarContactBtn?.addEventListener('click', function(e) {
-    e.preventDefault();
-    const modalBg = document.getElementById('contact-modal-bg');
-    if (modalBg) {
-      modalBg.classList.add('active');
+  // Botón de contacto abre modal
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbarContactBtn = document.getElementById('navbar-contact-btn');
+    navbarContactBtn?.addEventListener('click', function(e) {
+      e.preventDefault();
+      const modalBg = document.getElementById('contact-modal-bg');
+      if (modalBg) {
+        modalBg.classList.add('active');
+      }
+    });
+
+    // Menú hamburguesa
+    const burger = document.getElementById('navbar-burger');
+    const menu = document.getElementById('navbar-menu');
+    if (burger && menu) {
+      burger.addEventListener('click', function() {
+        const expanded = burger.getAttribute('aria-expanded') === 'true';
+        burger.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('open');
+        burger.classList.toggle('open');
+      });
     }
   });
-
-  const burger = document.getElementById('navbar-burger');
-  const menu = document.getElementById('navbar-menu');
-  if (burger && menu) {
-    burger.addEventListener('click', function() {
-      const expanded = burger.getAttribute('aria-expanded') === 'true';
-      burger.setAttribute('aria-expanded', String(!expanded));
-      menu.classList.toggle('open');
-      burger.classList.toggle('open');
-    });
-  }
 </script>
 
 <style>
   @import "../styles/palette.css";
-
+  .navbar {
+    background: #18191a;
+    width: 100vw;
+    margin: 0;
+    padding: 0.5em 0;
+    box-sizing: border-box;
+  }
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 2vw;
+    width: 100%;
+    min-height: 56px;
+    position: relative;
+  }
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
   .navbar-burger {
     display: none;
     flex-direction: column;
@@ -84,133 +113,19 @@ const { links } = Astro.props;
     padding: 0;
     transition: max-height 0.3s, opacity 0.3s;
   }
-  @media (max-width: 900px) {
-    .navbar-inner {
-      flex-direction: row;
-      width: 100vw;
-      max-width: 100vw;
-      margin: 0;
-      border-radius: 0;
-      box-sizing: border-box;
-      overflow-x: hidden;
-      padding: 1em 2vw;
-    }
-    
-    .navbar-burger {
-      display: flex;
-    }
-    .navbar-menu {
-      flex-direction: column;
-      width: 100%;
-      box-sizing: border-box;
-      min-height: 64px;
-      height: 100%;
-      width: 100vw;
-      background: #18191a;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      z-index: 1001;
-      box-shadow: 0 8px 32px rgba(7,59,76,0.10);
-      align-items: center;
-      height: 100%;
-    }
-    
-    .navbar-menu.open {
-      max-height: 400px;
-      opacity: 1;
-      padding: 1em 0;
-    }
-    .navbar-contact-btn {
-      margin-left: 0;
-      z-index: 1002;
-    }
-  
-
-  :global(html) {
-    scroll-behavior: smooth;
-  }
-      height: 44px;
-  .navbar {
-    background: #18191a;
-    padding: 1em 0;
-  }
-
-  .navbar-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 2vw;
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 56px;
-  position: relative;
-  }
-
-  .navbar ul {
-    display: flex;
-    gap: 2em;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
   .navbar li {
     margin: 0;
   }
-}
-    @media (min-width: 901px) {
-      .navbar-burger {
-        display: none !important;
-      }
-      .navbar-menu {
-        display: flex !important;
-        position: static !important;
-        flex-direction: row !important;
-        width: auto !important;
-        background: none !important;
-        max-height: none !important;
-        opacity: 1 !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        overflow: visible !important;
-        z-index: auto !important;
-      }
-      .navbar-contact-btn {
-        margin-left: 2em !important;
-        height: 44px !important;
-        font-size: 1.15em !important;
-        padding: 0.5em 1.5em !important;
-      }
-      .navbar-inner {
-        padding-left: 2em !important;
-        padding-right: 2em !important;
-        min-height: 64px !important;
-        width: 100%;
-        max-width: 1600px;
-        margin: 0 auto;
-      }
-      .navbar {
-        margin: 0 !important;
-        border-radius: 0 !important;
-        box-sizing: border-box;
-        overflow-x: hidden;
-      }
-
   .navbar a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.25em;
+    font-size: 1.15em;
     transition: color 0.2s;
   }
-
   .navbar a:hover {
     color: var(--color-secondary);
   }
-
   .navbar-contact-btn {
     margin-left: 2em;
     padding: 0.5em 1.5em;
@@ -219,7 +134,7 @@ const { links } = Astro.props;
     background: var(--color-info);
     color: #fff !important;
     font-weight: 700;
-    font-size: 1.25em;
+    font-size: 1.15em;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: background 0.2s, color 0.2s, border-color 0.2s;
@@ -231,73 +146,70 @@ const { links } = Astro.props;
     position: relative;
     z-index: 1002;
   }
-
   .navbar-contact-btn:hover {
     background: var(--color-info-dark);
     border-color: var(--color-info-dark);
     color: #fff !important;
   }
-}
-
   @media (max-width: 900px) {
     .navbar-inner {
-      flex-direction: row;
-      gap: 0.5em;
       padding: 1em 2vw;
-      align-items: center;
       min-height: 56px;
+    }
+    .navbar-left {
+      gap: 0.5em;
+    }
+    .navbar-burger {
+      display: flex;
+    }
+    .navbar-menu {
+      flex-direction: column;
+      width: 100vw;
+      background: #18191a;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      z-index: 1001;
+      box-shadow: 0 8px 32px rgba(7,59,76,0.10);
+      align-items: center;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+    }
+    .navbar-menu.open {
+      max-height: 400px;
+      opacity: 1;
+      padding: 1em 0;
     }
     .navbar-contact-btn {
       margin-left: 0;
-      display: flex;
-      align-items: center;
       height: 40px;
-    }
-    .navbar-menu.open {
-      padding-left: 1.2em;
-      padding-right: 1.2em;
     }
   }
   @media (max-width: 600px) {
-      .navbar-contact-btn {
-        padding: 0.35em 0.8em !important;
-        font-size: 1em !important;
-        padding-top: 0.7em;
-        padding-bottom: 0.7em;
-      }
-      .navbar-menu.open li a {
-        padding: 0.7em 0.5em;
-        display: block;
-        border-radius: 16px !important;
-        min-width: unset !important;
-        max-width: 90vw !important;
-        letter-spacing: 0.5px;
-        margin-left: 0.7em !important;
-        margin-right: 0 !important;
-        height: 32px !important;
-      }
-    .navbar {
-      width: 100vw !important;
-      max-width: 100vw !important;
-      border-radius: 0 !important;
-      margin: 0 !important;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-      box-sizing: border-box;
+    .navbar-contact-btn {
+      padding: 0.35em 0.8em !important;
+      font-size: 1em !important;
+      padding-top: 0.7em;
+      padding-bottom: 0.7em;
     }
-    .navbar-inner {
+    .navbar-menu.open li a {
+      padding: 0.7em 0.5em;
+      display: block;
+      border-radius: 16px !important;
+      max-width: 90vw !important;
+      letter-spacing: 0.5px;
+      margin-left: 0.7em !important;
+      margin-right: 0 !important;
+      height: 32px !important;
+    }
+    .navbar-inner, .navbar, .navbar-menu {
       width: 100vw !important;
       max-width: 100vw !important;
       box-sizing: border-box;
       padding-left: 0.5em;
       padding-right: 0.5em;
-    }
-    .navbar-menu {
-      width: 100vw !important;
-      max-width: 100vw !important;
-      left: 0 !important;
     }
   }
-  
-  
 </style>
