@@ -41,11 +41,30 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
   </div>
 </div>
 
-<script src="/trabajo-popup.js"></script>
 <script>
   if (typeof window !== 'undefined') {
     window.addEventListener('DOMContentLoaded', () => {
       const btns = document.querySelectorAll('.expand-btn[id$="-btn"]');
+      const modalBg = document.getElementById('trabajo-modal-bg');
+      const modalContent = document.getElementById('trabajo-modal-content');
+      const closeModal = document.getElementById('trabajo-close-modal');
+
+      function openTrabajoModal(content: string) {
+        if (modalBg && modalContent) {
+          modalContent.innerHTML = content;
+          modalBg.classList.add('active');
+          // Enfocar el modal para accesibilidad
+          setTimeout(() => modalBg.focus(), 100);
+        }
+      }
+
+      function closeTrabajoModal() {
+        if (modalBg) {
+          modalBg.classList.remove('active');
+          if (modalContent) modalContent.innerHTML = '';
+        }
+      }
+
       btns.forEach(btn => {
         btn.addEventListener('click', function (e) {
           if (window.matchMedia('(max-width: 600px)').matches) {
@@ -53,9 +72,25 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
             const card = btn.closest('.gallery-caption-overlay');
             const subtitle = card?.querySelector('.gallery-subtitle')?.outerHTML || '';
             const description = card?.querySelector('.gallery-description')?.outerHTML || '';
-            if (window.showPopup) window.showPopup(`${subtitle}${description}`, () => {});
+            openTrabajoModal(`${subtitle}${description}`);
           }
         });
+      });
+
+      if (closeModal) {
+        closeModal.addEventListener('click', closeTrabajoModal);
+      }
+      if (modalBg) {
+        modalBg.addEventListener('click', (e) => {
+          if (e.target === modalBg) {
+            closeTrabajoModal();
+          }
+        });
+      }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalBg?.classList.contains('active')) {
+          closeTrabajoModal();
+        }
       });
     });
   }
@@ -72,48 +107,7 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
     }
   }
 
-  /* Popup styles */
-  .trabajo-popup-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.2s;
-  }
-  .trabajo-popup {
-    background: #fff;
-    border-radius: 12px;
-    max-width: 90vw;
-    width: 95vw;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    padding: 1.5em 1.2em 1.2em 1.2em;
-    position: relative;
-    animation: popupIn 0.2s;
-  }
-  .trabajo-popup-close {
-    position: absolute;
-    top: 0.5em;
-    right: 0.7em;
-    background: none;
-    border: none;
-    font-size: 2em;
-    color: #888;
-    cursor: pointer;
-    z-index: 2;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes popupIn {
-    from { transform: translateY(40px) scale(0.98); opacity: 0; }
-    to { transform: none; opacity: 1; }
-  }
+
 </style>
 
 <style>
