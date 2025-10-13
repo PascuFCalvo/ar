@@ -132,7 +132,7 @@
     display: flex;
   }
   .trabajo-modal {
-    background: #fff;
+    background: rgba(255,255,255,0.92);
     border-radius: 12px;
     max-width: 90vw;
     width: 90vw;
@@ -169,9 +169,13 @@
     background: none;
     border: none;
     font-size: 2em;
-    color: #888;
+    color: var(--color-primary);
     cursor: pointer;
     z-index: 2;
+    transition: color 0.2s;
+  }
+  .trabajo-close-btn:hover {
+    color: var(--color-primary-dark);
   }
   @keyframes fadeIn {
     from { opacity: 0; }
