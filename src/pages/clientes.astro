@@ -466,7 +466,11 @@ import ClienteCard from '../components/ClienteCard.astro';
         const successPopup = document.getElementById('success-popup');
         const closeSuccessPopup = document.getElementById('close-success-popup');
         
-        if (sendBtn) sendBtn.disabled = true;
+        if (sendBtn) {
+          sendBtn.disabled = true;
+          sendBtn.style.pointerEvents = 'none';
+          sendBtn.style.opacity = '0.6';
+        }
         if (spinner) spinner.style.display = 'block';
         
         try {
@@ -478,19 +482,26 @@ import ClienteCard from '../components/ClienteCard.astro';
           const result = await res.json();
           
           if (result.success) {
-            if (successPopup) successPopup.classList.add('active');
             closeContactModal();
             contactForm.reset();
+            // Mostrar el popup de éxito después de ocultar el spinner
+            setTimeout(() => {
+              if (successPopup) successPopup.classList.add('active');
+            }, 100);
           } else {
             alert('Error al enviar el mensaje. Intenta de nuevo.');
           }
         } catch (err) {
           alert('Error de red o del servidor.');
         } finally {
-          if (sendBtn) sendBtn.disabled = false;
+          if (sendBtn) {
+            sendBtn.disabled = false;
+            sendBtn.style.pointerEvents = '';
+            sendBtn.style.opacity = '';
+          }
           if (spinner) spinner.style.display = 'none';
         }
-        
+        // Asegurar que el botón de cerrar siempre funcione
         if (closeSuccessPopup && successPopup) {
           closeSuccessPopup.onclick = () => {
             successPopup.classList.remove('active');
