@@ -23,8 +23,8 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     await transporter.sendMail({
-      from: `"Web Ana Ruiz Jornet" <hola@anaruizjornet.com>`, // remitente
-      to: ["hola@anaruizjornet.com", "ana.ruiz.jornet@gmail.com"], // destinatarios
+      from: `"Web Ana Ruiz Jornet" <hola@anaruizjornet.es>`, // remitente
+      to: ["hola@anaruizjornet.es", "ana.ruiz.jornet@gmail.com"], // destinatarios
       subject: `Nuevo mensaje del formulario de ${name}`,
       text: `
         Nombre: ${name}
