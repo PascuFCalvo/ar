@@ -1,36 +1,34 @@
 import type { APIRoute } from "astro";
 import nodemailer from "nodemailer";
-// import dotenv from "dotenv";
-// dotenv.config();
 
 export const POST: APIRoute = async ({ request }) => {
   const data = await request.json();
   const { name, email, message } = data;
 
-  // Configuración SMTP para hola@anaruizjornet.com (Arsys)
+  if (!process.env.EMAIL_PASSWORD) {
+    return new Response(
+      JSON.stringify({ success: false, error: "No hay contraseña definida" }),
+      { status: 500 }
+    );
+  }
+
   const transporter = nodemailer.createTransport({
     host: "smtp.serviciodecorreo.es",
     port: 465,
-    secure: true, // SSL/TLS
+    secure: true,
     auth: {
-      user: "hola@anaruizjornet.com", // tu dirección de envío
-      pass: process.env.EMAIL_PASSWORD, // Lee la contraseña desde la variable de entorno
+      user: "hola@anaruizjornet.es",
+      pass: process.env.EMAIL_PASSWORD,
     },
-    tls: {
-      rejectUnauthorized: false,
-    },
+    tls: { rejectUnauthorized: false },
   });
 
   try {
     await transporter.sendMail({
-      from: `"Web Ana Ruiz Jornet" <hola@anaruizjornet.es>`, // remitente
-      to: ["hola@anaruizjornet.es", "ana.ruiz.jornet@gmail.com"], // destinatarios
+      from: `"Web Ana Ruiz Jornet" <hola@anaruizjornet.es>`,
+      to: "hola@anaruizjornet.es", // destinatario principal
       subject: `Nuevo mensaje del formulario de ${name}`,
-      text: `
-        Nombre: ${name}
-        Email: ${email}
-        Mensaje: ${message}
-      `,
+      text: `Nombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
       html: `
         <h3>Nuevo mensaje desde el formulario de contacto</h3>
         <p><strong>Nombre:</strong> ${name}</p>
