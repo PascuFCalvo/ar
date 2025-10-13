@@ -458,7 +458,6 @@ import ClienteCard from '../components/ClienteCard.astro';
           const result = await res.json();
           
           if (result.success) {
-            closeContactModal();
             contactForm.reset();
             // Mostrar el popup de éxito después de ocultar el spinner
             setTimeout(() => {
@@ -481,6 +480,7 @@ import ClienteCard from '../components/ClienteCard.astro';
         if (closeSuccessPopup && successPopup) {
           closeSuccessPopup.onclick = () => {
             successPopup.classList.remove('active');
+            closeContactModal();
           };
         }
       }
