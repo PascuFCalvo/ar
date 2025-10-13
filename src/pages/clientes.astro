@@ -34,7 +34,6 @@ import ClienteCard from '../components/ClienteCard.astro';
   <div class="ana-ruiz-big">Ana Ruiz</div>
 </section>
 
-
 <div id="contact-modal-bg" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <form class="contact-modal" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
     <button type="button" class="close-btn" id="close-modal" aria-label="Cerrar modal">&times;</button>
@@ -45,272 +44,21 @@ import ClienteCard from '../components/ClienteCard.astro';
     <input type="email" id="email" name="email" required />
     <label for="message">Mensaje</label>
     <textarea id="message" name="message" rows="4" required></textarea>
-    <button type="submit">Enviar</button>
+    <button type="submit" id="send-btn">Enviar</button>
+    <div id="spinner" class="spinner" style="display:none;"></div>
   </form>
+
+  <div id="success-popup" class="success-popup">
+    <div class="success-popup-content">
+      <h3>¡Mensaje enviado!</h3>
+      <p>Gracias por contactar, te responderé lo antes posible 😊</p>
+      <button id="close-success-popup">Cerrar</button>
+    </div>
+  </div>
 </div>
 
 <style>
-  .clientes-section {
-    padding: 4em 2vw;
-    background: var(--color-primary, #fdc5c4);
-    box-sizing: border-box;
-    color: var(--color-accent, #03a67b);
-  }
-  .clientes-title {
-    font-size: 2em;
-    font-weight: 700;
-    margin-bottom: 0.5em;
-    color: var(--color-accent, #03a67b);
-    text-align: center;
-  }
-  .clientes-desc {
-    text-align: center;
-    color: var(--color-accent, #03a67b);
-    margin-bottom: 2.5em;
-    font-size: 1.25em;
-  }
-  .clientes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2em;
-    max-width: 1200px;
-    margin: 0 auto 3em auto;
-  }
-  @media (max-width: 900px) {
-    .clientes-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5em;
-    }
-  }
-  .contact-section {
-    background: var(--color-primary-light, #ffe0e0);
-    padding: 3em 2vw;
-    border-radius: 0;
-    margin: 2em auto 0 auto;
-    max-width: 700px;
-    box-shadow: 0 2px 16px 0 rgba(17,138,178,0.08);
-    text-align: center;
-  }
-  .contact-title {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: var(--color-accent, #03a67b);
-    margin-bottom: 0.5em;
-  }
-  .contact-desc {
-    color: var(--color-accent, #03a67b);
-    margin-bottom: 1.5em;
-    font-size: 1.1em;
-  }
-  .contact-btn {
-    background: var(--color-accent, #03a67b);
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 0.7em 1.5em;
-    font-size: 1.1em;
-    cursor: pointer;
-    margin-bottom: 1em;
-    transition: background 0.2s;
-  }
-  .contact-btn:hover {
-    background: var(--color-primary, #fdc5c4);
-    color: var(--color-dark, #073b4c);
-  }
-  .ana-ruiz-big {
-    font-size: 3.5em;
-    font-weight: 900;
-    color: var(--color-accent, #03a67b);
-    margin-top: 1.5em;
-    letter-spacing: 2px;
-    text-align: center;
-  }
-  /* Modal styles */
-  .modal-bg {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-bg.active {
-    display: flex;
-  }
-  .contact-modal {
-    background: #fff;
-    border-radius: 18px;
-    padding: 2em 1.5em;
-    max-width: 400px;
-    width: 90vw;
-    box-shadow: 0 2px 16px 0 rgba(17,138,178,0.12);
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-  .contact-modal label {
-    font-weight: 600;
-    color: var(--color-dark, #073b4c);
-    margin-bottom: 0.2em;
-    text-align: left;
-  }
-  .contact-modal input, .contact-modal textarea {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 0.5em;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .contact-modal button[type="submit"] {
-    background: var(--color-accent, #03a67b);
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 0.7em 1.5em;
-    font-size: 1.1em;
-    cursor: pointer;
-    margin-top: 1em;
-    transition: background 0.2s;
-  }
-  .contact-modal button[type="submit"]:hover {
-    background: var(--color-primary, #fdc5c4);
-    color: var(--color-dark, #073b4c);
-  }
-  .close-btn {
-    background: none;
-    border: none;
-    font-size: 2em;
-    color: #888;
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    cursor: pointer;
-  }
-  @media (max-width: 600px) {
-    .clientes-section {
-      padding: 2em 1vw;
-    }
-    .clientes-title {
-      font-size: 1.3em;
-    }
-    .clientes-desc {
-      font-size: 1em;
-    }
-    .clientes-grid {
-      grid-template-columns: 1fr;
-      gap: 1em;
-    }
-    .contact-section {
-      padding: 1.5em 1vw;
-    }
-    .contact-title {
-      font-size: 1.1em;
-    }
-    .ana-ruiz-big {
-      font-size: 1.5em;
-    }
-    .contact-modal {
-      padding: 1em 0.5em;
-      max-width: 98vw;
-    }
-  }
-</style>
-<script>
-  const contactLink = document.getElementById('contact-link');
-  const modalBg = document.getElementById('contact-modal-bg');
-  const closeModal = document.getElementById('close-modal');
-  const contactForm = document.getElementById('contact-form');
-
-  function openContactModal(e?: Event) {
-    if (e) e.preventDefault();
-    if (modalBg) {
-      modalBg.classList.add('active');
-      // Enfocar el primer input cuando se abre el modal
-      const firstInput = modalBg.querySelector('input');
-      if (firstInput) {
-        setTimeout(() => firstInput.focus(), 100);
-      }
-    }
-  }
-
-  function closeContactModal() {
-    if (modalBg) {
-      modalBg.classList.remove('active');
-    }
-  }
-
-
-  if (contactLink) {
-    contactLink.addEventListener('click', openContactModal);
-  }
-
-  // Cerrar modal
-  if (closeModal) {
-    closeModal.addEventListener('click', closeContactModal);
-  }
-
-  if (modalBg) {
-    modalBg.addEventListener('click', (e) => {
-      if (e.target === modalBg) {
-        closeContactModal();
-      }
-    });
-  }
-
-  // Cerrar con tecla Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalBg?.classList.contains('active')) {
-      closeContactModal();
-    }
-  });
-
-  // Manejo del formulario
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      if (contactForm instanceof HTMLFormElement) {
-        const formData = new FormData(contactForm);
-        const data = {
-          name: formData.get('name'),
-          email: formData.get('email'),
-          message: formData.get('message'),
-        };
-        try {
-          const res = await fetch('/api/send-email', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-          });
-          const result = await res.json();
-          if (result.success) {
-            alert('¡Mensaje enviado correctamente!');
-            closeContactModal();
-            contactForm.reset();
-          } else {
-            alert('Error al enviar el mensaje. Intenta de nuevo.');
-          }
-        } catch (err) {
-          alert('Error de red o del servidor.');
-        }
-      }
-    });
-  }
-</script>
-
-<style>
   :global(body) {
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
-  }
-
-  .clientes-section,
-  .contact-section,
-  .contact-title,
-  .contact-desc,
-  .contact-btn,
-  .clientes-title,
-  .clientes-desc {
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
   }
 
@@ -330,6 +78,7 @@ import ClienteCard from '../components/ClienteCard.astro';
     margin-bottom: 0.5em;
     text-align: left;
     letter-spacing: 0.01em;
+    color: var(--color-accent, #222);
   }
 
   .clientes-desc {
@@ -338,6 +87,7 @@ import ClienteCard from '../components/ClienteCard.astro';
     text-align: left;
     opacity: 0.92;
     line-height: 1.6;
+    color: var(--color-accent, #222);
   }
 
   .clientes-grid {
@@ -349,7 +99,7 @@ import ClienteCard from '../components/ClienteCard.astro';
 
   /* Sección de contacto */
   .contact-section.contact-rosa {
-    background: var(--color-primary);
+    background: var(--color-primary, #ff4f8b);
     color: var(--color-accent, #222);
     max-width: 1600px;
     margin: 0 auto;
@@ -402,7 +152,7 @@ import ClienteCard from '../components/ClienteCard.astro';
   .ana-ruiz-big {
     font-size: 6em;
     font-weight: 900;
-    color: var(--color-accent, #03a67b);
+    color: var(--color-accent, #222);
     text-align: center;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
@@ -411,7 +161,15 @@ import ClienteCard from '../components/ClienteCard.astro';
   }
 
   /* Modal */
-  /* .modal-trigger-btn styles removed */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    align-items: center;
     justify-content: center;
     z-index: 1000;
     backdrop-filter: blur(2px);
@@ -438,7 +196,7 @@ import ClienteCard from '../components/ClienteCard.astro';
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
     min-width: 320px;
     max-width: 500px;
-    width: 1600;
+    width: 90%;
     position: relative;
     animation: slideUp 0.3s ease-out;
   }
@@ -545,6 +303,78 @@ import ClienteCard from '../components/ClienteCard.astro';
     outline-offset: 2px;
   }
 
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--color-primary, #ff4f8b);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    animation: spin 1s linear infinite;
+    margin: 1em auto 0 auto;
+    display: block;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .success-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .success-popup.active {
+    display: flex;
+  }
+
+  .success-popup-content {
+    background: #fff;
+    border-radius: 18px;
+    padding: 2em 1.5em;
+    max-width: 350px;
+    width: 90vw;
+    box-shadow: 0 2px 16px 0 rgba(17, 138, 178, 0.12);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+  }
+
+  .success-popup-content h3 {
+    color: var(--color-primary, #ff4f8b);
+    margin-bottom: 0.5em;
+  }
+
+  .success-popup-content button {
+    background: var(--color-primary, #ff4f8b);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.7em 1.5em;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 1em;
+    transition: background 0.2s;
+  }
+
+  .success-popup-content button:hover {
+    background: var(--color-primary-dark, #e91e63);
+  }
+
   /* Media queries */
   @media (max-width: 900px) {
     .clientes-grid {
@@ -568,16 +398,105 @@ import ClienteCard from '../components/ClienteCard.astro';
       font-size: 3em;
     }
 
-    .modal-trigger-btn {
-      bottom: 1rem;
-      right: 1rem;
-      padding: 0.8rem 1.5rem;
-      font-size: 0.9rem;
-    }
-
     .contact-modal {
       width: 95vw;
       padding: 1.5rem;
     }
   }
 </style>
+
+<script>
+  const contactLink = document.getElementById('contact-link');
+  const modalBg = document.getElementById('contact-modal-bg');
+  const closeModal = document.getElementById('close-modal');
+  const contactForm = document.getElementById('contact-form');
+
+  function openContactModal(e?: Event) {
+    if (e) e.preventDefault();
+    if (modalBg) {
+      modalBg.classList.add('active');
+      const firstInput = modalBg.querySelector('input');
+      if (firstInput && firstInput instanceof HTMLInputElement) {
+        setTimeout(() => firstInput.focus(), 100);
+      }
+    }
+  }
+
+  function closeContactModal() {
+    if (modalBg) {
+      modalBg.classList.remove('active');
+    }
+  }
+
+  if (contactLink) {
+    contactLink.addEventListener('click', openContactModal);
+  }
+
+  if (closeModal) {
+    closeModal.addEventListener('click', closeContactModal);
+  }
+
+  if (modalBg) {
+    modalBg.addEventListener('click', (e) => {
+      if (e.target === modalBg) {
+        closeContactModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalBg?.classList.contains('active')) {
+      closeContactModal();
+    }
+  });
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (contactForm instanceof HTMLFormElement) {
+        const formData = new FormData(contactForm);
+        const data = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+        };
+        
+        const sendBtn = document.getElementById('send-btn') as HTMLButtonElement | null;
+        const spinner = document.getElementById('spinner');
+        const successPopup = document.getElementById('success-popup');
+        const closeSuccessPopup = document.getElementById('close-success-popup');
+        
+        if (sendBtn) sendBtn.disabled = true;
+        if (spinner) spinner.style.display = 'block';
+        
+        try {
+          const res = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          const result = await res.json();
+          
+          if (result.success) {
+            if (successPopup) successPopup.classList.add('active');
+            closeContactModal();
+            contactForm.reset();
+          } else {
+            alert('Error al enviar el mensaje. Intenta de nuevo.');
+          }
+        } catch (err) {
+          alert('Error de red o del servidor.');
+        } finally {
+          if (sendBtn) sendBtn.disabled = false;
+          if (spinner) spinner.style.display = 'none';
+        }
+        
+        if (closeSuccessPopup && successPopup) {
+          closeSuccessPopup.onclick = () => {
+            successPopup.classList.remove('active');
+          };
+        }
+      }
+    });
+  }
+</script>

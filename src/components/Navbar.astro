@@ -21,23 +21,30 @@ const { links, id } = Astro.props;
         ))}
       </ul>
     </div>
-  <ButtonComponent label="CONTACTO" class="navbar-contact-btn" />
+  <ButtonComponent label="CONTACTO" class="navbar-contact-btn" id="navbar-contact-btn" />
   </div>
 </nav>
 
 
 
 <script>
-  // Botón de contacto abre modal
+  // Botón de contacto de la navbar abre el mismo modal de contacto global
   document.addEventListener('DOMContentLoaded', () => {
     const navbarContactBtn = document.getElementById('navbar-contact-btn');
-    navbarContactBtn?.addEventListener('click', function(e) {
-      e.preventDefault();
-      const modalBg = document.getElementById('contact-modal-bg');
-      if (modalBg) {
-        modalBg.classList.add('active');
-      }
-    });
+    if (navbarContactBtn) {
+      navbarContactBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const modalBg = document.getElementById('contact-modal-bg');
+        if (modalBg) {
+          modalBg.classList.add('active');
+          // Enfocar el primer input cuando se abre el modal
+          const firstInput = modalBg.querySelector('input');
+          if (firstInput) {
+            setTimeout(() => firstInput.focus(), 100);
+          }
+        }
+      });
+    }
 
     // Menú hamburguesa
     const burger = document.getElementById('navbar-burger');

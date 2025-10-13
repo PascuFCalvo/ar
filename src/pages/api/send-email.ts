@@ -36,7 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     await transporter.sendMail({
       from: `"Web Ana Ruiz Jornet" <${smtpUser}>`,
-      to: smtpUser, // destinatario principal
+      to: [smtpUser, "ana.ruiz.jornet@gmail.com"], // destinatarios principal y copia
       subject: `Nuevo mensaje del formulario de ${name}`,
       text: `Nombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
       html: `
