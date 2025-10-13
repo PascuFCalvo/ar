@@ -59,16 +59,32 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
       function openTrabajoModal(content: string) {
         if (modalBg && modalContent) {
           modalContent.innerHTML = content;
+          // Reinicia animación
+          modalContent.style.transform = 'scale(0.7)';
+          modalContent.style.opacity = '0';
+          // Forzar reflow para reiniciar transición
+          void modalContent.offsetWidth;
           modalBg.classList.add('active');
+          setTimeout(() => {
+            modalContent.style.transform = '';
+            modalContent.style.opacity = '';
+          }, 10);
           // Enfocar el modal para accesibilidad
           setTimeout(() => modalBg.focus(), 100);
         }
       }
 
       function closeTrabajoModal() {
-        if (modalBg) {
-          modalBg.classList.remove('active');
-          if (modalContent) modalContent.innerHTML = '';
+        if (modalBg && modalContent) {
+          // Animar cierre
+          modalContent.style.transform = 'scale(0.7)';
+          modalContent.style.opacity = '0';
+          setTimeout(() => {
+            modalBg.classList.remove('active');
+            modalContent.innerHTML = '';
+            modalContent.style.transform = '';
+            modalContent.style.opacity = '';
+          }, 250); // Debe coincidir con la transición de opacity
         }
       }
 
@@ -258,7 +274,7 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
   .gallery-extra-text {
     max-height: 0;
-    overflow: hidden;
+    overflow-y: auto;
     opacity: 0;
     transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
                 opacity 0.25s 0.1s;
@@ -329,11 +345,20 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
     backdrop-filter: blur(8px);
     z-index: 1000;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s;
+    overflow-y: auto;
+  }
+  @media (max-width: 600px) {
+    #trabajo-modal-bg {
+      align-items: center;
+    }
+  }
+  #trabajo-modal-content {
+    margin-top: 2.5em;
   }
   #trabajo-modal-bg.active {
     opacity: 1;
@@ -350,6 +375,15 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
     position: relative;
     min-width: 320px;
     color: var(--color-accent, #1ec773); /* fuente verde accent */
+    transform: scale(0.7);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s;
+    will-change: transform, opacity;
+  }
+  #trabajo-modal-bg.active #trabajo-modal-content {
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s;
   }
   #trabajo-close-modal {
     position: absolute;
