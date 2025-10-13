@@ -21,7 +21,7 @@ const { links, id } = Astro.props;
         ))}
       </ul>
     </div>
-  <ButtonComponent label="CONTACTO" />
+  <ButtonComponent label="CONTACTO" class="navbar-contact-btn" />
   </div>
 </nav>
 
@@ -132,8 +132,8 @@ const { links, id } = Astro.props;
   }
   @media (max-width: 900px) {
     .navbar-inner {
-      padding: 1em 2vw;
-      min-height: 56px;
+      padding: 0.4em 2vw;
+      min-height: 40px;
     }
     .navbar-left {
       gap: 0.5em;
@@ -163,15 +163,23 @@ const { links, id } = Astro.props;
     }
     .navbar-contact-btn {
       margin-left: 0;
-      height: 40px;
+      margin-right: 0.7em;
+      height: 36px;
     }
   }
   @media (max-width: 600px) {
+    .navbar-inner {
+      min-height: 36px;
+      padding-top: 0.2em;
+      padding-bottom: 0.2em;
+    }
     .navbar-contact-btn {
       padding: 0.35em 0.8em !important;
       font-size: 1em !important;
       padding-top: 0.7em;
       padding-bottom: 0.7em;
+      margin-right: 0.7em;
+      height: 32px;
     }
     .navbar-menu.open li a {
       padding: 0.7em 0.5em;

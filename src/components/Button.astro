@@ -3,11 +3,12 @@
 export interface Props {
   label: string;
   type?: 'button' | 'submit' | 'reset';
+  class?: string;
   // Puedes pasar otros props como disabled, etc.
 }
-const { label, type = 'button', ...rest } = Astro.props;
+const { label, type = 'button', class: className = '', ...rest } = Astro.props;
 ---
-<button type={type} class="btn" {...rest}>
+<button type={type} class={`btn ${className}`.trim()} {...rest}>
   {label}
 </button>
 <style>
