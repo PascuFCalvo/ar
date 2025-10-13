@@ -165,6 +165,12 @@
     html, body, .main-container {
       margin-top: 0 !important;
       padding-top: 0 !important;
+      overflow-y: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+    html::-webkit-scrollbar, body::-webkit-scrollbar, .main-container::-webkit-scrollbar {
+      display: none;
     }
     /* Sin padding lateral en móvil */
   }
