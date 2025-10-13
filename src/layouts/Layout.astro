@@ -120,12 +120,13 @@
   .trabajo-modal-bg {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.65);
+    background: rgba(20,20,30,0.70);
     z-index: 9999;
     display: none;
     align-items: center;
     justify-content: center;
     animation: fadeIn 0.2s;
+    backdrop-filter: blur(2px);
   }
   .trabajo-modal-bg.active {
     display: flex;
@@ -133,10 +134,10 @@
   .trabajo-modal {
     background: #fff;
     border-radius: 12px;
-    max-width: 95vw;
-    width: 95vw;
-    max-height: 95vh;
-    height: 95vh;
+    max-width: 90vw;
+    width: 90vw;
+    max-height: 90dvh;
+    height: 90dvh;
     overflow-y: auto;
     box-shadow: 0 8px 32px rgba(0,0,0,0.18);
     padding: 1.5em 1.2em 1.2em 1.2em;
@@ -144,15 +145,21 @@
     animation: popupIn 0.2s;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
   }
   @media (max-width: 600px) {
     .trabajo-modal {
-      max-width: 95vw;
-      width: 95vw;
-      max-height: 95vh;
-      height: 95vh;
+      max-width: 90vw;
+      width: 90vw;
+      max-height: 90dvh;
+      height: 90dvh;
       border-radius: 0;
       padding: 1em 0.5em 1em 0.5em;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
     }
   }
   .trabajo-close-btn {
