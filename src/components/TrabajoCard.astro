@@ -36,7 +36,7 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
         <div class="gallery-extra-text desktop-only">
           <div class="gallery-extra-inner">
             {subtitle && <div class="gallery-subtitle">{subtitle}</div>}
-            {description && <div class="gallery-description">{description}</div>}
+            {description && <div class="gallery-description" set:html={description}></div>}
           </div>
         </div>
       </>
@@ -318,4 +318,60 @@ const uniqueId = `expand-${title.replace(/\s+/g, '-').toLowerCase()}`;
     display: block;
   }
 }
+  /* Popup modal styles */
+  #trabajo-modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255,255,255,0.68); /* aún más traslúcido */
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  #trabajo-modal-bg.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #trabajo-modal-content {
+    background: rgba(255,255,255,0.93);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    padding: 2.2em 1.5em 1.5em 1.5em;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    min-width: 320px;
+    color: var(--color-accent, #1ec773); /* fuente verde accent */
+  }
+  #trabajo-close-modal {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background: var(--color-accent, #1ec773);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(17, 138, 178, 0.10);
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  #trabajo-close-modal:hover {
+    background: #16a34a;
+  }
 </style>

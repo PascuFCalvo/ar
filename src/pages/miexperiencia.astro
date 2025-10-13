@@ -197,14 +197,14 @@
   justify-content: center;
   filter: zoom(1.2);
 }
-.exp-card-photo-vertical img {
-  width: 280px;
-  height: 480px;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px 0 rgba(17,138,178,0.08);
-  transform: rotate(-4deg);
-}
+  .exp-card-photo-vertical img {
+    width: 253px;
+    height: 433px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px 0 rgba(17,138,178,0.08);
+    transform: rotate(-4deg);
+  }
 .exp-job {
   background: #fff;
   border-radius: 16px;
@@ -266,7 +266,7 @@
     padding: 1em 0.5em;
   }
   .exp-card-photo-vertical img {
-    width: 90vw;
+    width: 80vw;
     height: auto;
     max-width: 320px;
     min-width: 120px;
@@ -277,6 +277,8 @@
 @media (max-width: 600px) {
   .experiencia-section {
     padding: 0;
+    margin-top: -17px !important;
+    margin-bottom: 0 !important;
   }
   .experiencia-title {
     font-size: 1.3em;
@@ -299,6 +301,21 @@
   .exp-card-content.improved {
     padding-left: 0.5em;
     padding-right: 0.5em;
+  }
+  .exp-experience-center-white {
+    /* No cambio aquí, solo para mantener el orden */
+  }
+  @media (max-width: 600px) {
+    .exp-card-left .exp-card-content.improved {
+      margin-left: 0.7em;
+      padding-left: 0.7em;
+      padding-right: 0.3em;
+    }
+    .exp-experience-center-white {
+      margin-right: 0.7em;
+      padding-right: 0.7em;
+      padding-left: 0.3em;
+    }
   }
   .exp-card-photo-vertical img {
     border-radius: 0 !important;
