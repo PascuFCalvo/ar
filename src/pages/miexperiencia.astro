@@ -276,17 +276,32 @@
 }
 @media (max-width: 600px) {
   .experiencia-section {
-    padding: 2em 1vw;
+    padding: 0;
   }
   .experiencia-title {
     font-size: 1.3em;
   }
   .experiencia-desc {
     font-size: 1em;
+    padding: 0 0.5em;
   }
-  .exp-card {
-    padding: 1em 0.5em;
-    min-height: 320px;
+  .exp-card,
+  .exp-card-left,
+  .exp-experience-center-white {
+    border-radius: 0 !important;
+    margin: 0;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  .exp-card-content.improved {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  .exp-card-photo-vertical img {
+    border-radius: 0 !important;
   }
 }
 </style>
