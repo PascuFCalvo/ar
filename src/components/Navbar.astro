@@ -2,9 +2,9 @@
 import ButtonComponent from './Button.astro';
 export interface Props {
   links: { label: string; href: string }[];
-  id
+  id: string;
 }
-const { links } = Astro.props;
+const { links, id } = Astro.props;
 ---
 
 
