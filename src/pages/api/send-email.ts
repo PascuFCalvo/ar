@@ -1,13 +1,20 @@
-import type { APIRoute } from "astro";
+
 import nodemailer from "nodemailer";
 
-export const POST: APIRoute = async ({ request }) => {
+export async function POST(request: Request) {
   const data = await request.json();
   const { name, email, message } = data;
 
-  if (!process.env.EMAIL_PASSWORD) {
+  const smtpUser = process.env.EMAIL_USER || "";
+  const smtpPass = process.env.EMAIL_PASSWORD || "";
+
+  // Log seguro para depuración (NO mostrar la contraseña)
+  console.log("EMAIL_USER:", smtpUser ? "[definido]" : "[NO DEFINIDO]");
+  console.log("EMAIL_PASSWORD:", smtpPass ? "[definido]" : "[NO DEFINIDO]");
+
+  if (!smtpUser || !smtpPass) {
     return new Response(
-      JSON.stringify({ success: false, error: "No hay contraseña definida" }),
+      JSON.stringify({ success: false, error: "Faltan credenciales SMTP (EMAIL_USER o EMAIL_PASSWORD)" }),
       { status: 500 }
     );
   }
@@ -17,16 +24,17 @@ export const POST: APIRoute = async ({ request }) => {
     port: 465,
     secure: true,
     auth: {
-      user: "hola@anaruizjornet.es",
-      pass: process.env.EMAIL_PASSWORD,
+      user: smtpUser,
+      pass: smtpPass,
     },
     tls: { rejectUnauthorized: false },
   });
 
   try {
+
     await transporter.sendMail({
-      from: `"Web Ana Ruiz Jornet" <hola@anaruizjornet.es>`,
-      to: "hola@anaruizjornet.es", // destinatario principal
+      from: `"Web Ana Ruiz Jornet" <${smtpUser}>`,
+      to: smtpUser, // destinatario principal
       subject: `Nuevo mensaje del formulario de ${name}`,
       text: `Nombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
       html: `

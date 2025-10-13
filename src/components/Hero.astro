@@ -24,7 +24,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    background: url('/images/anahero.jpg') center center/cover no-repeat;
+    background: url('/images/anahero.jpg') left center/cover no-repeat;
     padding: 3em 2em;
     margin-bottom: 0;
     min-height: 350px;
@@ -35,10 +35,20 @@
     z-index: 3;
     height: 700px;
     text-align: left;
+    background-size: 100% 100%;
+    background-position: left center;
+    transition: background-position 0.3s, background-size 0.3s;
+  }
+  @media (max-width: 1200px) {
+    .hero-main {
+      background-size: 120% 100%;
+      background-position: left center;
+    }
   }
   @media (max-width: 900px) {
     .hero-main {
-      background: var(--color-secondary, #fce331) !important;
+      background-size: 180% 100%;
+      background-position: left center;
       flex-direction: column;
       text-align: left;
       padding: 2em 1em;
@@ -49,9 +59,11 @@
   }
   @media (max-width: 600px) {
     .hero-main {
-      background: var(--color-secondary, #fce331) !important;
+      background-size: 300% 100%;
+      background-position: left center;
       height: auto !important;
       min-height: unset !important;
+      background-color: var(--color-secondary, #fce331) !important;
     }
   }
   .hero-yellow {
