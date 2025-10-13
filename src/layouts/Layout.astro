@@ -1,167 +1,171 @@
-</style>
 
-<style>
-	.trabajo-modal-bg {
-		position: fixed;
-		top: 0; left: 0; right: 0; bottom: 0;
-		background: rgba(0,0,0,0.45);
-		z-index: 9999;
-		display: none;
-		align-items: center;
-		justify-content: center;
-		animation: fadeIn 0.2s;
-	}
-	.trabajo-modal-bg.active {
-		display: flex;
-	}
-	.trabajo-modal {
-		background: #fff;
-		border-radius: 12px;
-		max-width: 90vw;
-		width: 95vw;
-		max-height: 80vh;
-		overflow-y: auto;
-		box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-		padding: 1.5em 1.2em 1.2em 1.2em;
-		position: relative;
-		animation: popupIn 0.2s;
-	}
-	.trabajo-close-btn {
-		position: absolute;
-		top: 0.5em;
-		right: 0.7em;
-		background: none;
-		border: none;
-		font-size: 2em;
-		color: #888;
-		cursor: pointer;
-		z-index: 2;
-	}
-	@keyframes fadeIn {
-		from { opacity: 0; }
-		to { opacity: 1; }
-	}
-	@keyframes popupIn {
-		from { transform: translateY(40px) scale(0.98); opacity: 0; }
-		to { transform: none; opacity: 1; }
-	}
-</style>
-<!doctype html>
-<html lang="en">
-	<head>
-		<link rel="stylesheet" href="/src/styles/global.css" />
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-	</head>
-	<body>
-		<div class="background-triangles" id="background-triangles"></div>
-		<div class="main-container">
-			<slot />
-		</div>
 
-				<!-- Modal persistente para popup de trabajo -->
-				<div id="trabajo-modal-bg" class="trabajo-modal-bg" role="dialog" aria-modal="true" aria-labelledby="trabajo-modal-title" tabindex="-1">
-					<div class="trabajo-modal" id="trabajo-modal">
-						<button type="button" class="trabajo-close-btn" id="trabajo-close-modal" aria-label="Cerrar popup">&times;</button>
-						<div id="trabajo-modal-content"></div>
-					</div>
-				</div>
-	</body>
+
+---
+// Layout principal del sitio
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Fondo dinámico -->
+    <div id="background-triangles" class="background-triangles"></div>
+
+    <div class="main-container">
+      <slot />
+    </div>
+
+    <!-- Modal persistente para popup de trabajo -->
+    <div id="trabajo-modal-bg" class="trabajo-modal-bg" role="dialog" aria-modal="true" aria-labelledby="trabajo-modal-title" tabindex="-1">
+      <div class="trabajo-modal" id="trabajo-modal">
+        <button type="button" class="trabajo-close-btn" id="trabajo-close-modal" aria-label="Cerrar popup">&times;</button>
+        <div id="trabajo-modal-content"></div>
+      </div>
+    </div>
+
+    <script>
+      // Fondo dinámico según la sección visible
+      window.addEventListener('DOMContentLoaded', () => {
+        const bg = document.getElementById('background-triangles');
+        let sections = [
+          { id: 'inicio', color: '#FF6B6B' },
+          { id: 'sobre-mi', color: '#4ECDC4' },
+          { id: 'servicios', color: '#FFD166' },
+          { id: 'loquehago', color: '#45B7D1' },
+          { id: 'casosdeexito', color: '#FFA07A' },
+          { id: 'experiencia', color: '#98D8C8' },
+          { id: 'contacto-final', color: '#F7DC6F' },
+        ];
+        // Mezclar colores manteniendo ids
+        const colors = sections.map(s => s.color);
+        /**
+         * Mezcla un array in-place (Fisher-Yates)
+         */
+        function shuffle(array: string[]) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+        }
+        shuffle(colors);
+        sections = sections.map((s, i) => ({ ...s, color: colors[i] }));
+
+        // Intersection Observer para cambiar el fondo
+        if (bg) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const section = sections.find(s => s.id === entry.target.id);
+                if (section) {
+                  bg.style.background = section.color;
+                }
+              }
+            });
+          }, {
+            threshold: 0.5,
+            rootMargin: '-20% 0px -20% 0px'
+          });
+          sections.forEach(section => {
+            const element = document.getElementById(section.id);
+            if (element) {
+              observer.observe(element);
+            }
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-	body, html {
-		font-family: 'Poppins', Arial, Helvetica, sans-serif;
-	}
-	.background-triangles {
-		position: fixed;
-		z-index: 0;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		pointer-events: none;
-		background: #ffb3c6;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center;
-		filter: blur(2px) brightness(1.08);
-		transition: background 0.8s ease;
-	}
-		.main-container {
-			margin: 0 auto;
-			box-sizing: border-box;
-			min-height: 100vh;
-			max-width: 1600px;
-			width: 100%;
-			position: relative;
-			z-index: 1;
-		}
-			@media (max-width: 900px) {
-				html, body, .main-container {
-					margin-top: 0 !important;
-					padding-top: 0 !important;
-				}
-					/* Revertido: sin padding lateral en móvil */
-			}
+  html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  }
+  .background-triangles {
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: #ffb3c6;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(2px) brightness(1.08);
+    transition: background 0.8s ease;
+  }
+  .main-container {
+    margin: 0 auto;
+    box-sizing: border-box;
+    min-height: 100vh;
+    max-width: 1600px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .trabajo-modal-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s;
+  }
+  .trabajo-modal-bg.active {
+    display: flex;
+  }
+  .trabajo-modal {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 90vw;
+    width: 95vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    padding: 1.5em 1.2em 1.2em 1.2em;
+    position: relative;
+    animation: popupIn 0.2s;
+  }
+  .trabajo-close-btn {
+    position: absolute;
+    top: 0.5em;
+    right: 0.7em;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #888;
+    cursor: pointer;
+    z-index: 2;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes popupIn {
+    from { transform: translateY(40px) scale(0.98); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+  @media (max-width: 900px) {
+    html, body, .main-container {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+    /* Sin padding lateral en móvil */
+  }
 </style>
-
-<script>
-	window.addEventListener('DOMContentLoaded', () => {
-		const bg = document.getElementById('background-triangles');
-		
-				// Define las secciones y sus colores
-				let sections = [
-						{ id: 'inicio', color: '#FF6B6B' },
-						{ id: 'sobre-mi', color: '#4ECDC4' },
-						{ id: 'servicios', color: '#FFD166' },
-						{ id: 'loquehago', color: '#45B7D1' },
-						{ id: 'casosdeexito', color: '#FFA07A' },
-						{ id: 'experiencia', color: '#98D8C8' },
-						{ id: 'contacto-final', color: '#F7DC6F' },
-				];
-				// Mezclar aleatoriamente los colores (manteniendo el id fijo)
-				const colors = sections.map(s => s.color);
-				function shuffle(array) {
-					for (let i = array.length - 1; i > 0; i--) {
-						const j = Math.floor(Math.random() * (i + 1));
-						[array[i], array[j]] = [array[j], array[i]];
-					}
-				}
-				shuffle(colors);
-				sections = sections.map((s, i) => ({ ...s, color: colors[i] }));
-
-		// Usar Intersection Observer para mejor rendimiento
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					const section = sections.find(s => s.id === entry.target.id);
-					if (section) {
-						bg.style.background = section.color;
-					}
-				}
-			});
-		}, {
-			threshold: 0.5, // Se activa cuando el 50% de la sección es visible
-			rootMargin: '-20% 0px -20% 0px' // Ajusta para cambiar antes/después
-		});
-
-		// Observar todas las secciones
-		sections.forEach(section => {
-			const element = document.getElementById(section.id);
-			if (element) {
-				observer.observe(element);
-			}
-		});
-	});
-</script>

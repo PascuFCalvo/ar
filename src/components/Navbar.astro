@@ -1,6 +1,8 @@
 ---
+import ButtonComponent from './Button.astro';
 export interface Props {
   links: { label: string; href: string }[];
+  id
 }
 const { links } = Astro.props;
 ---
@@ -19,9 +21,11 @@ const { links } = Astro.props;
         ))}
       </ul>
     </div>
-    <a href="#" class="navbar-contact-btn" id="navbar-contact-btn">CONTACTO</a>
+  <ButtonComponent label="CONTACTO" />
   </div>
 </nav>
+
+
 
 <script>
   // Botón de contacto abre modal
@@ -125,31 +129,6 @@ const { links } = Astro.props;
   }
   .navbar a:hover {
     color: var(--color-secondary);
-  }
-  .navbar-contact-btn {
-    margin-left: 2em;
-    padding: 0.5em 1.5em;
-    border: 2px solid var(--color-info);
-    border-radius: 24px;
-    background: var(--color-info);
-    color: #fff !important;
-    font-weight: 700;
-    font-size: 1.15em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    height: 40px;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1002;
-  }
-  .navbar-contact-btn:hover {
-    background: var(--color-info-dark);
-    border-color: var(--color-info-dark);
-    color: #fff !important;
   }
   @media (max-width: 900px) {
     .navbar-inner {

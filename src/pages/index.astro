@@ -1,12 +1,14 @@
 ---
+
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
 import SobreMi from './sobre-mi.astro';
 import Servicios from './servicios.astro';
 import Trabajos from './trabajo.astro';
 import MiExperiencia from './miexperiencia.astro';
 import Clientes from './clientes.astro';
-import Charlas from './charlas.astro';	
+import Charlas from './charlas.astro';
 import FooterPink from '../components/FooterPink.astro';
 
 const links = [
@@ -20,29 +22,9 @@ const links = [
 ---
 
 <Layout>
-  <Navbar links={links} />
-  <section id="inicio" class="hero-main hero-yellow">
-  <!-- Degradado eliminado -->
-    <div class="hero-content-main">
-      <h1 class="hero-title-main">Ana Ruiz</h1>
-      <h2 class="hero-title-main hero-title-secondary">Especialista en Growth Marketing</h2>
-      <div class="hero-subtitles-group">
-        <p class="hero-subtitle-main">Estoy aquí para darle sentido común a tu estrategia y moverla contigo
-        <span class="hero-subtitle-secondary">
-          <span style="color: var(--color-info)">Estrategia</span> · 
-          <span style="color: var(--color-info)">IA</span> · 
-          <span style="color: var(--color-info)">Procesos</span> · 
-          <span style="color: var(--color-info)">Crecimiento</span> · 
-          <span style="color: var(--color-info)">Sentido común</span>
-        </span>
-        </p>
-      </div>
-    </div>
-    <!-- Imagen del hero eliminada -->
-  </section>
-
+  <Navbar id="navbar" links={links} />
+  <Hero />
   <SobreMi />
-
   <section id="servicios">
     <Servicios />
   </section>
