@@ -22,8 +22,8 @@
 <style>
   .hero-main {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: flex-start;
     background: url('/images/anahero.jpg') center center/cover no-repeat;
     padding: 3em 2em;
     margin-bottom: 0;
@@ -34,12 +34,13 @@
     position: relative;
     z-index: 3;
     height: 600px;
+    text-align: left;
   }
   @media (max-width: 900px) {
     .hero-main {
       background: var(--color-secondary, #fce331) !important;
       flex-direction: column;
-      text-align: center;
+      text-align: left;
       padding: 2em 1em;
     }
     .hero-img-main {
@@ -59,9 +60,11 @@
     flex: 1 1 60%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: relative;
     z-index: 2;
+    text-align: left;
   }
   .hero-title-main {
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
@@ -71,6 +74,7 @@
     line-height: 1.02;
     color: #222;
     letter-spacing: -1px;
+    text-align: left;
   }
   .hero-title-secondary {
     font-size: 2.2em;
@@ -78,6 +82,7 @@
     margin: 0 0 0.5em 0;
     color: #222;
     letter-spacing: 0.5px;
+    text-align: left;
   }
   .hero-subtitles-group {
     display: flex;
@@ -87,6 +92,7 @@
     margin-top: 1.2em;
     margin-bottom: 0;
     min-height: 90px;
+    text-align: left;
   }
   .hero-subtitle-main {
     font-size: 1.25em;
@@ -97,6 +103,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.2em;
+    text-align: left;
   }
   .hero-subtitle-secondary {
     font-size: 1.25em;
@@ -104,6 +111,7 @@
     margin: 0;
     font-weight: 400;
     display: block;
+    text-align: left;
   }
   .hero-img-main {
     flex: 1 1 40%;

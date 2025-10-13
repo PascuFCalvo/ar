@@ -7,22 +7,16 @@
   <p class="experiencia-desc">No tengo títulos rimbombantes, pero tengo experiencia real: he pasado por mil historias, oficios y entornos distintos. De todos me llevé algo: adaptarme rápido, encontrar soluciones y sacar las cosas adelante.</p>
   <div class="experiencia-section-inner" style="max-width: 1600px; margin: 0 auto; overflow: hidden;">
     <div class="experiencia-grid">
-      <div class="exp-card exp-card-left">
-        <!-- Photo removed as requested -->
-        <div class="exp-card-content improved" style="align-items: flex-start; text-align: left;">
-          
+      <div class="exp-card exp-card-left exp-card-yellow">
+        <div class="exp-card-content improved">
+          <h2 class="exp-card-yellow-title">De dónde sale todo esto</h2>
           <p class="exp-card-desc">
-            <h1>De dónde sale todo esto</h1><br />
-            Me encantaría decir que tengo un MBA de esos que suenan impresionantes…<br />
-            Pero no.<br />
-            Tengo lo que yo llamo el máster del universo.<br />
-            He hecho de todo: camarera, dependienta, limpiar discotecas, trabajar en un convento de monjas (no, no era monja), auxiliar de veterinaria, diseñar bolsos, montar una tienda de ropa, trabajar en agencias de marketing, coordinar equipos, acompañar marcas personales… y fundar una startup: Pandabox.<br />
-            He pasado por mil historias, oficios y entornos distintos.<br />
-            De todos me llevé algo: adaptarme rápido, encontrar soluciones y sacar las cosas adelante.<br />
-            No tengo títulos rimbombantes, pero tengo experiencia real.
+            No tengo un MBA, pero sí lo que llamo el máster del universo.<br /><br />
+            He hecho de todo: camarera, dependienta, limpiadora de discotecas, auxiliar de veterinaria, diseñadora de bolsos, emprendedora, y hasta trabajé en un convento (sin ser monja).<br /><br />
+            He pasado por mil oficios y entornos, y de cada uno me llevé algo: adaptarme rápido, resolver problemas y sacar adelante lo que me propongo.<br /><br />
+            No tengo títulos rimbombantes, pero sí experiencia real.<br />
           </p>
-          <br><br>
-          <button class="exp-btn">Descargar mi CV</button>
+          <button class="exp-btn exp-btn-yellow">Descargar mi CV</button>
         </div>
       </div>
   <div class="exp-experience-center-white exp-card">
@@ -100,18 +94,22 @@
   min-height: 540px;
   height: 100%;
 }
-.exp-card-left {
-  grid-column: 1 / 2;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  background: var(--color-secondary);
-  color: var(--color-dark);
+  .exp-card-left {
+    grid-column: 1 / 2;
+    justify-content: flex-start;
+    align-items: stretch;
+    text-align: left;
+    background: var(--color-secondary);
+    color: var(--color-dark);
+    padding: 2.5em 2em 2em 2em;
+    box-shadow: 0 4px 32px 0 rgba(17,138,178,0.10);
+  }
+
 .exp-experience-center-white {
   background: var(--color-accent);
   color: #fff;
 }
-}
+
 .exp-card-photo-top {
   display: flex;
   justify-content: center;
