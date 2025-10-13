@@ -33,7 +33,7 @@
     border-radius: 0;
     position: relative;
     z-index: 3;
-    height: 600px;
+
     text-align: left;
   }
   @media (max-width: 900px) {
@@ -50,6 +50,8 @@
   @media (max-width: 600px) {
     .hero-main {
       background: var(--color-secondary, #fce331) !important;
+      height: auto !important;
+      min-height: unset !important;
     }
   }
   .hero-yellow {
@@ -93,6 +95,11 @@
     margin-bottom: 0;
     min-height: 90px;
     text-align: left;
+  }
+  @media (max-width: 600px) {
+    .hero-subtitles-group {
+      margin-bottom: 10px !important;
+    }
   }
   .hero-subtitle-main {
     font-size: 1.25em;
