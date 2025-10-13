@@ -1,7 +1,7 @@
-
+import type { APIRoute } from "astro";
 import nodemailer from "nodemailer";
 
-export async function POST(request: Request) {
+export const POST: APIRoute = async ({ request }) => {
   const data = await request.json();
   const { name, email, message } = data;
 
@@ -14,7 +14,10 @@ export async function POST(request: Request) {
 
   if (!smtpUser || !smtpPass) {
     return new Response(
-      JSON.stringify({ success: false, error: "Faltan credenciales SMTP (EMAIL_USER o EMAIL_PASSWORD)" }),
+      JSON.stringify({
+        success: false,
+        error: "Faltan credenciales SMTP (EMAIL_USER o EMAIL_PASSWORD)",
+      }),
       { status: 500 }
     );
   }
@@ -31,7 +34,6 @@ export async function POST(request: Request) {
   });
 
   try {
-
     await transporter.sendMail({
       from: `"Web Ana Ruiz Jornet" <${smtpUser}>`,
       to: smtpUser, // destinatario principal
