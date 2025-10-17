@@ -19,7 +19,9 @@ const { links, id } = Astro.props;
         {links.map(link => (
           <li><a href={link.href}>{link.label}</a></li>
         ))}
-          
+        <li>
+          <button id="navbar-contact-btn" class="navbar-contact-btn exp-btn exp-btn-yellow" type="button">Contacto</button>
+        </li>
       </ul>
     </div>
   </div>
